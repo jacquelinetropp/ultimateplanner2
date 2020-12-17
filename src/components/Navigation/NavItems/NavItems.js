@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import NavItem from "./NavItem";
 
@@ -14,20 +14,34 @@ const Ul = styled.ul`
   height: 100%;
 `;
 
-const NavItems = ({ mobile, clicked }) => {
-  return (
-    <Nav>
-      <Ul mobile={mobile}>
+const NavItems = ({ mobile, clicked, loggedIn }) => {
+  let links;
+  if (loggedIn.uid) {
+    links = (
+      <Fragment>
         <NavItem clicked={clicked} mobile={mobile} link="/">
-          home
-        </NavItem>
-        <NavItem clicked={clicked} mobile={mobile} link="/todos">
           Todos
         </NavItem>
+        <NavItem clicked={clicked} mobile={mobile} link="/logout">
+          Log Out
+        </NavItem>
+      </Fragment>
+    );
+  } else {
+    links = (
+      <Fragment>
         <NavItem clicked={clicked} mobile={mobile} link="/login">
           Login
         </NavItem>
-      </Ul>
+        <NavItem clicked={clicked} mobile={mobile} link="/signup">
+          Signup
+        </NavItem>
+      </Fragment>
+    );
+  }
+  return (
+    <Nav>
+      <Ul mobile={mobile}>{links}</Ul>
     </Nav>
   );
 };

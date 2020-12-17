@@ -11,18 +11,21 @@ export const Container = styled.div`
 
 export const FormWrapper = styled.div`
   width: 100%;
-  max-width: 90rem;
+  max-width: 50rem;
   margin: 0 auto;
   flex-direction: column;
   border-radius: 1rem;
-  padding: 3rem 2rem;
+  padding: 10rem 8rem;
   display: flex;
   align-items: center;
-  background-color: var(--color-main);
+  background-color: var(--color-mainDark);
   box-shadow: 0rem 0.5rem 3.5rem var(--shadow);
 `;
 
 export const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  position: relative;
+  align-items: center;
 `;

@@ -9,6 +9,7 @@ import { reduxFirestore, getFirestore } from "redux-firestore";
 const rrfConfig = {
   userProfile: "users",
   useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
+  attachAuthIsReady: true,
 };
 
 const composeEnhancers =

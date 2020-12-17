@@ -1,3 +1,5 @@
+import * as actions from "./actionTypes";
+
 export const signUp = (data) => async (
   dispatch,
   getState,
@@ -5,10 +7,83 @@ export const signUp = (data) => async (
 ) => {
   const firebase = getFirebase();
   const firestore = getFirestore();
+  dispatch({ type: actions.AUTH_START });
   try {
-    const res = await firestore
+    const res = await firebase
       .auth()
-      .createUserwithEmailAndPassword(data.email, data.password);
-    console.log(res);
-  } catch (err) {}
+      .createUserWithEmailAndPassword(data.email, data.password);
+
+    //send verification email
+    const user = firebase.auth().currentUser;
+    await user.sendEmailVerification();
+
+    await firestore.collection("users").doc(res.user.uid).set({
+      firstName: data.firstName,
+      lastName: data.lastName,
+    });
+    dispatch({ type: actions.AUTH_SUCCESS });
+  } catch (err) {
+    dispatch({ type: actions.AUTH_FAIL, payload: err.message });
+  }
+  dispatch({ type: actions.AUTH_END });
+};
+
+export const signOut = () => async (dispatch, getState, { getFirebase }) => {
+  const firebase = getFirebase();
+  try {
+    console.log("hello");
+    await firebase.auth().signOut();
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export const signIn = (data) => async (dispatch, getState, { getFirebase }) => {
+  const firebase = getFirebase();
+  dispatch({ type: actions.AUTH_START });
+  try {
+    await firebase.auth().signInWithEmailAndPassword(data.email, data.password);
+    dispatch({ type: actions.AUTH_SUCCESS });
+  } catch (err) {
+    dispatch({ type: actions.AUTH_FAIL, payload: err.message });
+  }
+  dispatch({ type: actions.AUTH_END });
+};
+
+export const clean = () => ({
+  type: actions.CLEAN_UP,
+});
+
+//Verify Email actions
+export const verifyEmail = () => async (
+  dispatch,
+  getState,
+  { getFirebase }
+) => {
+  const firebase = getFirebase();
+  dispatch({ type: actions.VERIFY_START });
+  try {
+    const user = firebase.auth().currentUser;
+    await user.sendEmailVerification();
+    dispatch({ type: actions.VERIFY_SUCCESS });
+  } catch (err) {
+    dispatch({ type: actions.VERIFY_FAIL, payload: err.message });
+  }
+};
+
+//Recover Password
+export const recoverPassword = (data) => async (
+  dispatch,
+  getState,
+  { getFirebase }
+) => {
+  const firebase = getFirebase();
+  dispatch({ type: actions.RECOVERY_START });
+  try {
+    // send email ehre
+    await firebase.auth().sendPasswordResetEmail(data.email);
+    dispatch({ type: actions.RECOVERY_SUCCESS });
+  } catch (err) {
+    dispatch({ type: actions.RECOVERY_FAIL, payload: err.message });
+  }
 };
