@@ -6,10 +6,11 @@ import Layout from "./components/layout/Layout";
 import Login from "./containers/Auth/Login";
 import SignUp from "./containers/Auth/SignUp";
 import Home from "./containers/Home";
-import Todos from "./containers/Todos";
+import Todos from "./containers/Todos/Todos";
 import Logout from "./containers/Auth/Logout";
 import VerifyEmail from "./containers/Auth/VerifyEmail";
 import RecoverPassword from "./containers/Auth/RecoverPassword";
+import Profile from "./containers/Auth/Profile";
 
 const App = ({ loggedIn, emailVerified }) => {
   let routes;
@@ -24,7 +25,8 @@ const App = ({ loggedIn, emailVerified }) => {
   } else if (loggedIn && emailVerified) {
     routes = (
       <Switch>
-        <Route path="/" component={Todos} />
+        <Route exact path="/" component={Todos} />
+        <Route path="/profile" component={Profile} />
         <Route path="/logout" component={Logout} />
         <Redirect to="/" />
       </Switch>

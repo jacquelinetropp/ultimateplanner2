@@ -4,7 +4,6 @@ import * as actions from "../../store/actions";
 
 const Logout = ({ logout }) => {
   useEffect(() => {
-    console.log("hello");
     logout();
   }, [logout]);
   return null;

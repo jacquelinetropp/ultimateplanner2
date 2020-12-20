@@ -22,6 +22,9 @@ const NavItems = ({ mobile, clicked, loggedIn }) => {
         <NavItem clicked={clicked} mobile={mobile} link="/">
           Todos
         </NavItem>
+        <NavItem clicked={clicked} mobile={mobile} link="/profile">
+          Profile
+        </NavItem>
         <NavItem clicked={clicked} mobile={mobile} link="/logout">
           Log Out
         </NavItem>
@@ -35,6 +38,9 @@ const NavItems = ({ mobile, clicked, loggedIn }) => {
         </NavItem>
         <NavItem clicked={clicked} mobile={mobile} link="/signup">
           Signup
+        </NavItem>
+        <NavItem clicked={clicked} mobile={mobile} link="/recover">
+          Recover password
         </NavItem>
       </Fragment>
     );

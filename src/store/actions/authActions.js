@@ -87,3 +87,53 @@ export const recoverPassword = (data) => async (
     dispatch({ type: actions.RECOVERY_FAIL, payload: err.message });
   }
 };
+
+//edit profile
+export const editProfile = (data) => async (
+  dispatch,
+  getState,
+  { getFirebase, getFirestore }
+) => {
+  const firebase = getFirebase();
+  const firestore = getFirestore();
+  const user = firebase.auth().currentUser;
+  const { uid: userId, email: userEmail } = getState().firebase.auth;
+  dispatch({ type: actions.PROFILE_START });
+  try {
+    if (data.email !== userEmail) {
+      await user.updateEmail(data.email);
+    }
+    await firestore.collection("users").doc(userId).set({
+      firstName: data.firstName,
+      lastName: data.lastName,
+    });
+
+    if (data.password.length > 0) {
+      await user.updatePassword(data.password);
+    }
+    dispatch({ type: actions.PROFILE_SUCCESS });
+  } catch (err) {
+    console.log(err);
+    dispatch({ type: actions.PROFILE_FAIL, payload: err.message });
+  }
+};
+
+//Delete user
+export const deleteUser = () => async (
+  dispatch,
+  getState,
+  { getFirestore, getFirebase }
+) => {
+  const firebase = getFirebase();
+  const firestore = getFirestore();
+  const user = firebase.auth().currentUser;
+  const userId = getState().firebase.auth.uid;
+  dispatch({ type: actions.DELETE_START });
+  try {
+    await user.delete();
+
+    await firestore.collection("users").doc(userId).delete();
+  } catch (err) {
+    dispatch({ type: actions.DELETE_FAIL, payload: err.message });
+  }
+};
