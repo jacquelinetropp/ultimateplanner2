@@ -55,8 +55,9 @@ export const deleteTodo = (id) => async (
     await firestore.collection("todos").doc(userId).update({
       todos: newTodos,
     });
-    dispatch({ type: actions.DELETE_TODO_FAIL });
+    dispatch({ type: actions.DELETE_TODO_SUCCESS });
   } catch (err) {
+    console.log(err);
     dispatch({ type: actions.DELETE_TODO_FAIL, payload: err.message });
   }
 };
@@ -79,7 +80,6 @@ export const editTodo = (id, data) => async (
     await firestore.collection("todos").doc(userId).update({
       todos,
     });
-    console.log("This ran once");
     dispatch({ type: actions.ADD_TODO_SUCCESS });
     return true;
   } catch (err) {

@@ -10,3 +10,5 @@ export {
 } from "./authActions";
 
 export { addTodo, deleteTodo, editTodo } from "./todoActions";
+
+export { addProject, editProject } from "./projectsActions";

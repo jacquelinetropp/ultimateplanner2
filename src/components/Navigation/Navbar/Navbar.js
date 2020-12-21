@@ -2,12 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { withTheme } from "styled-components";
 import Logo from "../../Logo/Logo";
-import { Container } from "../../hoc/layouts/elements";
+import { Container } from "../../styles/Wrappers";
 import NavItems from "../NavItems/NavItems";
 
-const FixedWrapper = styled.div`
+const FixedWrapper = styled.header`
   position: fixed;
-  background-color: ${(props) => props.theme.colors.main};
+  background-color: ${({ transparent }) =>
+    transparent ? "transparent" : "var(--color-main)"};
   padding: 0rem 2rem;
   top: 0;
   left: 0;
@@ -25,9 +26,9 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const Navbar = ({ loggedIn }) => {
+const Navbar = ({ loggedIn, transparent }) => {
   return (
-    <FixedWrapper>
+    <FixedWrapper transparent={transparent}>
       <Container>
         <Wrapper>
           <Logo />

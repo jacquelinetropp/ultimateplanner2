@@ -38,8 +38,8 @@ store.firebaseAuthIsReady.then(() => {
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <Fragment>
-            <App />
             <GlobalStyles />
+            <App />
           </Fragment>
         </ThemeProvider>
       </BrowserRouter>

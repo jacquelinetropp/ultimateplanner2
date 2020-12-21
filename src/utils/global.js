@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-export default createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   *,
   *::before,
   *::after {
@@ -18,10 +18,11 @@ export default createGlobalStyle`
   :root {
     font-size: 62.5%;
     box-sizing: border-box;
-    --color-main: ${(props) => props.theme.colors.main}
+    --color-main: ${(props) => props.theme.colors.main};
     --color-mainDark: ${(props) => props.theme.colors.mainDark};
     --color-mainLight: ${(props) => props.theme.colors.mainLight};
-    --color-mainLighter: ${(props) => props.theme.colors.mainLighter};
+    --color-second: ${(props) => props.theme.colors.second};
+    --color-secondLight: ${(props) => props.theme.colors.secondLight};
     --color-text: ${(props) => props.theme.colors.textColor};
     --color-white: ${(props) => props.theme.colors.whiteColor};
     --color-errorRed: ${(props) => props.theme.colors.errorRed};
@@ -47,3 +48,5 @@ export default createGlobalStyle`
     font-family: inherit;
   }
 `;
+
+export default GlobalStyles;

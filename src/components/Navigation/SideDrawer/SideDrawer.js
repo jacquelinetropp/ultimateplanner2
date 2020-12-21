@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import styled from "styled-components";
 import Logo from "../../Logo/Logo";
 import NavItems from "../NavItems/NavItems";
-import Hamburger from "./Hamburger";
+import Hamburger from "../../UI/Hamburger/Hamburger";
 
 const FixedWrapper = styled.div`
   position: fixed;
@@ -41,6 +41,7 @@ const Menu = styled.div`
   top: 0;
   left: 0;
   display: none;
+  z-index: ${(props) => (props.opened ? "10" : "0")};
   @media ${(props) => props.theme.mediaQueries.small} {
     display: flex;
   }
