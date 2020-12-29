@@ -57,7 +57,6 @@ const InputProject = ({
           }}
           validationSchema={ProjectSchema}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
-            console.log("test");
             // send our project
             const res = project
               ? await editProject(project.id, values)

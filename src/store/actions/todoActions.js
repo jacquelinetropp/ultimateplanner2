@@ -1,5 +1,22 @@
 import * as actions from "./actionTypes";
 
+//getTodos
+export const getTodos = (id) => async (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
+  const firestore = getFirestore();
+  try {
+    console.log("starting");
+    const res = await firestore.collection("projects").doc(id).get();
+    // const todos = await firestore.collection("todos").doc(id).get();
+    console.log(res);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 //add todo
 export const addTodo = (data) => async (
   dispatch,

@@ -11,6 +11,7 @@ import VerifyEmail from "./pages/Auth/VerifyEmail";
 import RecoverPassword from "./pages/Auth/RecoverPassword";
 import Profile from "./pages/Auth/Profile";
 import TodosLayout from "./components/layouts/TodosLayout";
+import Projects from "./pages/Projects/Projects";
 
 const App = ({ loggedIn, emailVerified }) => {
   let routes;
@@ -28,9 +29,10 @@ const App = ({ loggedIn, emailVerified }) => {
     routes = (
       <Layout>
         <Switch>
-          <Route exact path="/" component={TodosLayout} />
+          <Route exact path="/" component={Projects} />
           <Route path="/profile" component={Profile} />
           <Route path="/logout" component={Logout} />
+          <Route path="/:id" component={TodosLayout} />
           <Redirect to="/" />
         </Switch>
       </Layout>

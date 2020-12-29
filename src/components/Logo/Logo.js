@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const LogoWrapper = styled.div`
+const LogoWrapper = styled(Link)`
   color: var(--color-white);
   height: 100%;
   display: flex;
@@ -12,7 +13,7 @@ const LogoWrapper = styled.div`
 `;
 
 const Logo = () => {
-  return <LogoWrapper>Productivity</LogoWrapper>;
+  return <LogoWrapper to="/">Productivity</LogoWrapper>;
 };
 
 export default Logo;

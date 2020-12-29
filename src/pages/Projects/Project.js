@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import styled from "styled-components";
+import DeleteProject from "./DeleteProject";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -25,6 +28,10 @@ const Controls = styled.div`
   justify-content: center;
 `;
 
+const StyledLink = styled(Link)`
+  color: var(--color-white);
+`;
+
 const editStyles = {
   color: "var(--color-main)",
   margin: "0 .5rem",
@@ -38,14 +45,24 @@ const deleteStyles = {
 };
 
 const Project = ({ project }) => {
+  const [isDeleting, setIsDeleting] = useState(false);
   return (
     <Wrapper>
-      {project.project}
+      <StyledLink to={`/${project.id}`}>{project.name}</StyledLink>
       <Controls>
         {" "}
         <i className="fas fa-edit" style={editStyles} />
-        <i className="fas fa-trash-alt" style={deleteStyles} />
+        <i
+          className="fas fa-trash-alt"
+          style={deleteStyles}
+          onClick={() => setIsDeleting(true)}
+        />
       </Controls>
+      <DeleteProject
+        project={project}
+        show={isDeleting}
+        close={() => setIsDeleting(false)}
+      />
     </Wrapper>
   );
 };

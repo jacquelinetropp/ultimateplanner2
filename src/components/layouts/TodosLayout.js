@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Todos from "../../pages/Todos/Todos";
-import Projects from "../../pages/Projects/Projects";
+import Project from "../Projects/Project";
+import { useParams } from "react-router-dom";
 
 const TodosWrapper = styled.div`
   display: flex;
@@ -9,10 +10,12 @@ const TodosWrapper = styled.div`
 `;
 
 const TodosLayout = () => {
+  const { id } = useParams();
+  console.log({ id });
   return (
     <TodosWrapper>
-      <Projects />
-      <Todos />
+      <Project id={id} />
+      <Todos id={id} />
     </TodosWrapper>
   );
 };

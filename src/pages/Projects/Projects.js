@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Button from "../../components/UI/Forms/Button";
 import * as actions from "../../store/actions/index";
 import styled from "styled-components";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
 
 import Heading from "../../components/UI/Headings/Headings";
 import InputProject from "./InputProject";
@@ -36,7 +34,12 @@ const Content = styled.div`
   margin-top: 2rem;
 `;
 
-const Projects = ({ logout, projects, requested, userId }) => {
+const Projects = ({ logout, userId, getProjects, projects }) => {
+  useEffect(() => {
+    getProjects();
+    console.log("got the projects");
+  }, []);
+
   const [isAdding, setIsAdding] = useState(false);
 
   let content;
@@ -47,31 +50,29 @@ const Projects = ({ logout, projects, requested, userId }) => {
         <Loader isWhite />
       </Content>
     );
-  } else if (!projects[userId] || !projects[userId].projects) {
+  }
+  // } else if (!projects[userId] || !projects[userId].projects) {
+  //   content = (
+  //     <Content>
+  //       <Heading color="white" size="h2">
+  //         You have no projects!
+  //       </Heading>
+  //     </Content>
+  //   );
+  // } else if (projects[userId].projects.length === 0) {
+  //   content = (
+  //     <Content>
+  //       <Heading color="white" size="h2">
+  //         You have no projects!
+  //       </Heading>
+  //     </Content>
+  //   ); }
+  else {
     content = (
       <Content>
-        <Heading color="white" size="h2">
-          You have no projects!
-        </Heading>
-      </Content>
-    );
-  } else if (projects[userId].projects.length === 0) {
-    content = (
-      <Content>
-        <Heading color="white" size="h2">
-          You have no projects!
-        </Heading>
-      </Content>
-    );
-  } else {
-    content = (
-      <Content>
-        {projects[userId].projects
-          .slice(0)
-          .reverse()
-          .map((project) => (
-            <Project key={project.id} project={project} />
-          ))}
+        {projects.map((project) => (
+          <Project key={project.id} project={project} />
+        ))}
       </Content>
     );
   }
@@ -97,18 +98,14 @@ const Projects = ({ logout, projects, requested, userId }) => {
     </Wrapper>
   );
 };
-const mapStateToProps = ({ firebase, firestore }) => ({
+const mapStateToProps = ({ firebase, firestore, projects }) => ({
   userId: firebase.auth.uid,
-  projects: firestore.data.projects,
-  requesting: firestore.status.requesting,
-  fetched: firestore.status.requested,
+  projects: projects.projects,
 });
 
 const mapDispatchToProps = {
   logout: actions.signOut,
+  getProjects: actions.getProjects,
 };
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect((props) => [`projects/${props.userId}`])
-)(Projects);
+export default connect(mapStateToProps, mapDispatchToProps)(Projects);

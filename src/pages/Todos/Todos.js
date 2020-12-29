@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Button from "../../components/UI/Forms/Button";
 import * as actions from "../../store/actions/index";
 import styled from "styled-components";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
 
 import Heading from "../../components/UI/Headings/Headings";
 import InputTodo from "./InputTodo";
-import Todo from "./Todo";
-import Loader from "../../components/UI/Loader/Loader";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -36,45 +32,48 @@ const Content = styled.div`
   margin-top: 2rem;
 `;
 
-const Todos = ({ logout, todos, requested, userId }) => {
+const Todos = ({ id, logout, getTodos }) => {
+  useEffect(() => {
+    actions.getTodos(id);
+  }, []);
   const [isAdding, setIsAdding] = useState(false);
 
   let content;
 
-  if (!todos) {
-    content = (
-      <Content>
-        <Loader isWhite />
-      </Content>
-    );
-  } else if (!todos[userId] || !todos[userId].todos) {
-    content = (
-      <Content>
-        <Heading color="white" size="h2">
-          You have no todos!
-        </Heading>
-      </Content>
-    );
-  } else if (todos[userId].todos.length === 0) {
-    content = (
-      <Content>
-        <Heading color="white" size="h2">
-          You have no todos!
-        </Heading>
-      </Content>
-    );
-  } else {
-    content = (
-      <Content>
-        {todos[userId].todos
-          .slice(0)
-          .reverse()
-          .map((todo) => (
-            <Todo key={todo.id} todo={todo} />
-          ))}
-      </Content>
-    );
-  }
+  // if (!todos) {
+  //   content = (
+  //     <Content>
+  //       <Loader isWhite />
+  //     </Content>
+  //   );
+  // } else if (!todos[userId] || !todos[userId].todos) {
+  //   content = (
+  //     <Content>
+  //       <Heading color="white" size="h2">
+  //         You have no todos!
+  //       </Heading>
+  //     </Content>
+  //   );
+  // } else if (todos[userId].todos.length === 0) {
+  //   content = (
+  //     <Content>
+  //       <Heading color="white" size="h2">
+  //         You have no todos!
+  //       </Heading>
+  //     </Content>
+  //   );
+  // } else {
+  //   content = (
+  //     <Content>
+  //       {todos[userId].todos
+  //         .slice(0)
+  //         .reverse()
+  //         .map((todo) => (
+  //           <Todo key={todo.id} todo={todo} />
+  //         ))}
+  //     </Content>
+  //   );
+  // }
 
   return (
     <Wrapper>
@@ -106,9 +105,7 @@ const mapStateToProps = ({ firebase, firestore }) => ({
 
 const mapDispatchToProps = {
   logout: actions.signOut,
+  getTodos: actions.getTodos,
 };
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect((props) => [`todos/${props.userId}`])
-)(Todos);
+export default connect(null, mapDispatchToProps)(Todos);

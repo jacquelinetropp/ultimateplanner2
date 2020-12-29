@@ -9,6 +9,12 @@ export {
   deleteUser,
 } from "./authActions";
 
-export { addTodo, deleteTodo, editTodo } from "./todoActions";
+export { addTodo, deleteTodo, editTodo, getTodos } from "./todoActions";
 
-export { addProject, editProject } from "./projectsActions";
+export {
+  addProject,
+  editProject,
+  getProjects,
+  deleteProject,
+  getOneProject,
+} from "./projectsActions";
