@@ -42,10 +42,6 @@ const InputProject = ({
   editProject,
 }) => {
   const loadingText = project ? "Editing..." : "Adding...";
-  const [sValues, setValues] = useState("");
-  const onChangeHandler = (e) => {
-    setValues(e.target.values);
-  };
 
   console.log(project);
   return (
