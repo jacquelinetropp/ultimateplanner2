@@ -12,9 +12,9 @@ const deleteStyles = {
 
 const Project = ({ getOneProject, project, id }) => {
   const [isDeleting, setIsDeleting] = useState(false);
-  useEffect(() => {
-    getOneProject(id);
-  }, [getOneProject]);
+  // useEffect(() => {
+  //   getOneProject(id);
+  // }, [getOneProject]);
 
   return (
     <div>

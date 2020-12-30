@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import styled from "styled-components";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
@@ -42,6 +42,7 @@ const InputProject = ({
   editProject,
 }) => {
   const loadingText = project ? "Editing..." : "Adding...";
+
   return (
     <Fragment>
       <Modal opened={opened} close={close}>

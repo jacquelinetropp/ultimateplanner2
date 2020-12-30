@@ -24,7 +24,6 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         error: false,
-        projects: [...state.projects, payload],
       };
 
     case actions.ADD_PROJECT_FAIL:
@@ -85,10 +84,7 @@ export default (state = initialState, { type, payload }) => {
     case actions.DELETE_PROJECT_SUCCESS:
       return {
         ...state,
-        projects: {
-          ...state.projects,
-          payload,
-        },
+
         deleteProject: {
           ...state.deleteProject,
           loading: false,
@@ -111,6 +107,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         error: null,
+        projects: null,
         getProject: {
           ...state.getProject,
           loading: false,

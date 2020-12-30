@@ -8,7 +8,6 @@ import Heading from "../../components/UI/Headings/Headings";
 import InputProject from "./InputProject";
 import Project from "./Project";
 import Loader from "../../components/UI/Loader/Loader";
-import { cleanup } from "@testing-library/react";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -35,18 +34,9 @@ const Content = styled.div`
   margin-top: 2rem;
 `;
 
-const Projects = ({
-  logout,
-  userId,
-  getProjects,
-  projects,
-  loading,
-  deleting,
-  cleanUp,
-}) => {
+const Projects = ({ getProjects, projects, loading, deleting, cleanUp }) => {
   useEffect(() => {
     getProjects();
-    cleanup();
   }, []);
 
   const [isAdding, setIsAdding] = useState(false);
@@ -100,9 +90,6 @@ const Projects = ({
         </Button>
         <InputProject opened={isAdding} close={() => setIsAdding(false)} />
         {content}
-        <Button color="main" onClick={() => logout()}>
-          Logout
-        </Button>
       </InnerWrapper>
     </Wrapper>
   );
@@ -115,7 +102,6 @@ const mapStateToProps = ({ firebase, firestore, projects }) => ({
 });
 
 const mapDispatchToProps = {
-  logout: actions.signOut,
   getProjects: actions.getProjects,
   cleanUp: actions.cleanUp,
 };

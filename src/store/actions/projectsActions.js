@@ -10,37 +10,25 @@ export const getProjects = () => async (
   const userId = getState().firebase.auth.uid;
   dispatch({ type: actions.GET_PROJECT_START });
   try {
-    // let projects = [];
-    // const docs = await firestore
-    //   .collection("projects")
-    //   .where("userId", "==", userId)
-    //   .get();
-    // if (docs) {
-    //   docs.forEach((doc) => {
-    //     projects.push({
-    //       id: doc.id,
-    //       name: doc.data().name,
-    //       userId: doc.data().userId,
-    //       createdAt: doc.data().createdAt,
-    //     });
-    //   });
     let projects = [];
-    await firestore
+
+    const projectsMos = await firestore
       .collection("projects")
-      .where("userId", "==", userId)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          projects.push({
-            id: doc.id,
-            name: doc.data().name,
-            userId: doc.data().userId,
-            createdAt: doc.data().createdAt,
-          });
+      .where("userId", "==", userId);
+
+    projectsMos.onSnapshot((snapshot) => {
+      let projects = [];
+      snapshot.docs.forEach((doc) => {
+        projects.push({
+          id: doc.id,
+          name: doc.data().name,
+          userId: doc.data().userId,
+          createdAt: doc.data().createdAt,
         });
       });
+      dispatch({ type: actions.GET_PROJECT_SUCCESS, payload: projects });
+    });
     console.log(projects);
-    dispatch({ type: actions.GET_PROJECT_SUCCESS, payload: projects });
   } catch (err) {
     dispatch({ type: actions.GET_PROJECT_FAIL, payload: err });
     console.log(err);
@@ -96,7 +84,7 @@ export const addProject = (data) => async (
           id: docRef.id,
         };
       });
-    dispatch({ type: actions.ADD_PROJECT_SUCCESS, payload: project });
+    dispatch({ type: actions.ADD_PROJECT_SUCCESS });
     return true;
   } catch (err) {
     console.log(err);
@@ -118,12 +106,16 @@ export const editProject = (id, data) => async (
     // const projects = res.data().projects;
     // const index = projects.findIndex((project) => project.id === id);
     // projects[index].project = data.project;
+    const update = {
+      name: data.name,
+    };
 
-    const project = await firestore.collection("projects").doc(id).update({
-      data,
+    console.log(data);
+    await firestore.collection("projects").doc(id).update({
+      name: update,
     });
 
-    dispatch({ type: actions.ADD_PROJECT_SUCCESS, payload: project });
+    dispatch({ type: actions.ADD_PROJECT_SUCCESS });
     return true;
   } catch (err) {
     dispatch({ type: actions.ADD_PROJECT_FAIL, payload: err.message });
@@ -145,7 +137,7 @@ export const deleteProject = (id) => async (
     projects.filter((project) => project.id !== id);
     getProjects();
 
-    dispatch({ type: actions.DELETE_PROJECT_SUCCESS, payload: projects });
+    dispatch({ type: actions.DELETE_PROJECT_SUCCESS });
   } catch (err) {
     console.log(err);
     dispatch({ type: actions.DELETE_PROJECT_FAIL, payload: err.message });
