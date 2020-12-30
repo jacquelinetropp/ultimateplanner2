@@ -28,7 +28,6 @@ export const getProjects = () => async (
       });
       dispatch({ type: actions.GET_PROJECT_SUCCESS, payload: projects });
     });
-    console.log(projects);
   } catch (err) {
     dispatch({ type: actions.GET_PROJECT_FAIL, payload: err });
     console.log(err);

@@ -43,10 +43,11 @@ const InputProject = ({
 }) => {
   const loadingText = project ? "Editing..." : "Adding...";
   const [sValues, setValues] = useState("");
-  const onCHangeHandler = (e) => {
+  const onChangeHandler = (e) => {
     setValues(e.target.values);
   };
 
+  console.log(project);
   return (
     <Fragment>
       <Modal opened={opened} close={close}>
@@ -58,7 +59,7 @@ const InputProject = ({
         </Heading>
         <Formik
           initialValues={{
-            project: project ? project.project : "",
+            project: project ? project.name : "",
           }}
           validationSchema={ProjectSchema}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
@@ -73,14 +74,14 @@ const InputProject = ({
             resetForm();
           }}
         >
-          {({ isSubmitting, isValid, resetForm }) => (
+          {({ values, handleChange, isSubmitting, isValid, resetForm }) => (
             <StyledForm>
               <Field
                 type="text"
                 name="project"
                 placeholder={project ? project.name : "Write your project..."}
-                onChange={onCHangeHandler}
-                value={sValues}
+                onChange={handleChange}
+                value={values.project}
                 component={Input}
               />
               <ButtonsWrapper>
