@@ -73,7 +73,7 @@ const InputProject = ({
               <Field
                 type="text"
                 name="project"
-                placeholder="Write your project..."
+                placeholder={project ? project.name : "Write your project..."}
                 component={Input}
               />
               <ButtonsWrapper>

@@ -50,7 +50,9 @@ const DeleteProject = ({
         <Button
           contain
           color="red"
-          onClick={() => deleteProject(project.id)}
+          onClick={() => {
+            deleteProject(project.id);
+          }}
           disabled={loading}
           loading={loading ? "Deleting..." : null}
         >

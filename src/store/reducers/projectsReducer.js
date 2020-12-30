@@ -20,7 +20,12 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, loading: true };
 
     case actions.ADD_PROJECT_SUCCESS:
-      return { ...state, loading: false, error: false };
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        projects: [...state.projects, payload],
+      };
 
     case actions.ADD_PROJECT_FAIL:
       return { ...state, loading: false, error: payload };
@@ -55,8 +60,6 @@ export default (state = initialState, { type, payload }) => {
         },
       };
 
-    default:
-
     case actions.DELETE_PROJECT_START:
       return {
         ...state,
@@ -66,9 +69,26 @@ export default (state = initialState, { type, payload }) => {
         },
       };
 
+    case actions.DELETE_PROJECT_START:
+      return {
+        ...state,
+        projects: {
+          ...state.projects,
+          payload,
+        },
+        deleteProject: {
+          ...state.deleteProject,
+          loading: true,
+        },
+      };
+
     case actions.DELETE_PROJECT_SUCCESS:
       return {
         ...state,
+        projects: {
+          ...state.projects,
+          payload,
+        },
         deleteProject: {
           ...state.deleteProject,
           loading: false,
@@ -86,6 +106,23 @@ export default (state = initialState, { type, payload }) => {
         },
       };
 
+    case actions.PROJECT_CLEANUP:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        getProject: {
+          ...state.getProject,
+          loading: false,
+          error: null,
+        },
+        deleteProject: {
+          ...state.deleteProject,
+          error: null,
+          loading: false,
+        },
+      };
+    default:
       return state;
   }
 };

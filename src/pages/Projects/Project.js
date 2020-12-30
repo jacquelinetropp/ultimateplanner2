@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 import DeleteProject from "./DeleteProject";
+import InputProject from "./InputProject";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -16,7 +17,7 @@ const Wrapper = styled.div`
   font-weight: 700;
   text-align: center;
   color: var(--color-white);
-  z-index: 5;
+  z-index: 0;
 `;
 const Controls = styled.div`
   position: absolute;
@@ -46,12 +47,17 @@ const deleteStyles = {
 
 const Project = ({ project }) => {
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   return (
     <Wrapper>
       <StyledLink to={`/${project.id}`}>{project.name}</StyledLink>
       <Controls>
         {" "}
-        <i className="fas fa-edit" style={editStyles} />
+        <i
+          className="fas fa-edit"
+          style={editStyles}
+          onClick={() => setIsEditing(true)}
+        />
         <i
           className="fas fa-trash-alt"
           style={deleteStyles}
@@ -62,6 +68,11 @@ const Project = ({ project }) => {
         project={project}
         show={isDeleting}
         close={() => setIsDeleting(false)}
+      />
+      <InputProject
+        project={project}
+        opened={isEditing}
+        close={() => setIsEditing(false)}
       />
     </Wrapper>
   );

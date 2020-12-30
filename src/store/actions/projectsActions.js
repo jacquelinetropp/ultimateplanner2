@@ -85,10 +85,18 @@ export const addProject = (data) => async (
       userId: userId,
       createdAt: new Date().toISOString(),
     };
-
-    firestore.collection("projects").add(newProject);
-
-    dispatch({ type: actions.ADD_PROJECT_SUCCESS });
+    let project;
+    await firestore
+      .collection("projects")
+      .add(newProject)
+      .then((docRef) => {
+        console.log("this is the doc ref ", docRef.id);
+        project = {
+          ...newProject,
+          id: docRef.id,
+        };
+      });
+    dispatch({ type: actions.ADD_PROJECT_SUCCESS, payload: project });
     return true;
   } catch (err) {
     console.log(err);
@@ -106,16 +114,16 @@ export const editProject = (id, data) => async (
   const userId = getState().firebase.auth.uid;
   dispatch({ type: actions.ADD_PROJECT_START });
   try {
-    const res = await firestore.collection("projects").doc(userId).get();
-    const projects = res.data().projects;
-    const index = projects.findIndex((project) => project.id === id);
-    projects[index].project = data.project;
+    // const res = await firestore.collection("projects").doc(userId).get();
+    // const projects = res.data().projects;
+    // const index = projects.findIndex((project) => project.id === id);
+    // projects[index].project = data.project;
 
-    await firestore.collection("projects").doc(userId).update({
-      projects,
+    const project = await firestore.collection("projects").doc(id).update({
+      data,
     });
 
-    dispatch({ type: actions.ADD_PROJECT_SUCCESS });
+    dispatch({ type: actions.ADD_PROJECT_SUCCESS, payload: project });
     return true;
   } catch (err) {
     dispatch({ type: actions.ADD_PROJECT_FAIL, payload: err.message });
@@ -129,12 +137,21 @@ export const deleteProject = (id) => async (
   { getFirestore }
 ) => {
   const firestore = getFirestore();
+  const projects = getState().projects.projects;
   console.log("trying to delete");
+  dispatch({ type: actions.DELETE_PROJECT_START });
   try {
     firestore.collection("projects").doc(id).delete();
-    dispatch({ type: actions.DELETE_TODO_SUCCESS });
+    projects.filter((project) => project.id !== id);
+    getProjects();
+
+    dispatch({ type: actions.DELETE_PROJECT_SUCCESS, payload: projects });
   } catch (err) {
     console.log(err);
-    dispatch({ type: actions.DELETE_TODO_FAIL, payload: err.message });
+    dispatch({ type: actions.DELETE_PROJECT_FAIL, payload: err.message });
   }
 };
+
+export const cleanUp = () => ({
+  type: actions.PROJECT_CLEANUP,
+});

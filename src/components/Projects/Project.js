@@ -27,7 +27,11 @@ const Project = ({ getOneProject, project, id }) => {
         style={deleteStyles}
         onClick={() => setIsDeleting(true)}
       />
-      <DeleteProject project={project} />
+      <DeleteProject
+        project={project}
+        show={isDeleting}
+        close={() => setIsDeleting(false)}
+      />
     </div>
   );
 };

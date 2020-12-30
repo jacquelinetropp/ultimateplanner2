@@ -8,6 +8,7 @@ import Heading from "../../components/UI/Headings/Headings";
 import InputProject from "./InputProject";
 import Project from "./Project";
 import Loader from "../../components/UI/Loader/Loader";
+import { cleanup } from "@testing-library/react";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -34,17 +35,25 @@ const Content = styled.div`
   margin-top: 2rem;
 `;
 
-const Projects = ({ logout, userId, getProjects, projects }) => {
+const Projects = ({
+  logout,
+  userId,
+  getProjects,
+  projects,
+  loading,
+  deleting,
+  cleanUp,
+}) => {
   useEffect(() => {
     getProjects();
-    console.log("got the projects");
+    cleanup();
   }, []);
 
   const [isAdding, setIsAdding] = useState(false);
 
   let content;
 
-  if (!projects) {
+  if (!projects || loading || deleting) {
     content = (
       <Content>
         <Loader isWhite />
@@ -101,11 +110,14 @@ const Projects = ({ logout, userId, getProjects, projects }) => {
 const mapStateToProps = ({ firebase, firestore, projects }) => ({
   userId: firebase.auth.uid,
   projects: projects.projects,
+  loading: projects.loading,
+  deleting: projects.deleteProject.loading,
 });
 
 const mapDispatchToProps = {
   logout: actions.signOut,
   getProjects: actions.getProjects,
+  cleanUp: actions.cleanUp,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Projects);
