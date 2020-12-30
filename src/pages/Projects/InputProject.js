@@ -42,6 +42,10 @@ const InputProject = ({
   editProject,
 }) => {
   const loadingText = project ? "Editing..." : "Adding...";
+  const [sValues, setValues] = useState("");
+  const onCHangeHandler = (e) => {
+    setValues(e.target.values);
+  };
 
   return (
     <Fragment>
@@ -75,6 +79,8 @@ const InputProject = ({
                 type="text"
                 name="project"
                 placeholder={project ? project.name : "Write your project..."}
+                onChange={onCHangeHandler}
+                value={sValues}
                 component={Input}
               />
               <ButtonsWrapper>
