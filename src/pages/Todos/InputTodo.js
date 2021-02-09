@@ -12,6 +12,7 @@ import Input from "../../components/UI/Forms/Input";
 import { StyledForm } from "../../components/styles/Wrappers";
 
 import * as actions from "../../store/actions";
+import { useParams } from "react-router-dom";
 
 const ButtonsWrapper = styled.div`
   display: flex;
@@ -39,6 +40,7 @@ const InputTodo = ({
   close,
   editTodo,
 }) => {
+  const { id } = useParams();
   const loadingText = todo ? "Editing..." : "Adding...";
   return (
     <Fragment>
@@ -58,7 +60,7 @@ const InputTodo = ({
             // send our todo
             const res = todo
               ? await editTodo(todo.id, values)
-              : await addTodo(values);
+              : await addTodo(values, id);
             setSubmitting(false);
             if (res) {
               close();
@@ -112,6 +114,7 @@ const InputTodo = ({
 const mapStateToProps = ({ todos }) => ({
   loading: todos.loading,
   error: todos.error,
+  
 });
 
 const mapDispatchToProps = {

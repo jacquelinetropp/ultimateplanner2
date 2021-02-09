@@ -49,7 +49,7 @@ export const getOneProject = (id) => async (
     const project = await snapshot.data();
     console.log(project);
 
-    dispatch({ type: actions.GET_PROJECT_SUCCESS, payload: project });
+    dispatch({ type: actions.ONE_PROJECT_SUCCESS, payload: project });
   } catch (err) {
     dispatch({ type: actions.GET_PROJECT_FAIL, payload: err });
     console.log(err);

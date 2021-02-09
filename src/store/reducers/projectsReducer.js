@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   error: null,
   projects: [],
+  currentProject: [],
   getProject: {
     loading: false,
     error: null,
@@ -48,6 +49,17 @@ export default (state = initialState, { type, payload }) => {
           error: false,
         },
       };
+    
+      case actions.ONE_PROJECT_SUCCESS:
+        return {
+          ...state,
+          currentProject: payload,
+          getProject: {
+            ...state.getProject,
+            loading: false,
+            error: false,
+          },
+        };
 
     case actions.GET_PROJECT_FAIL:
       return {

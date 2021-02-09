@@ -7,10 +7,19 @@ const initialState = {
     error: null,
     loading: false,
   },
+  currentTodos: []
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
+    case actions.GET_TODO_START:
+      return { ...state, loading: true };
+
+    case actions.GET_TODO_SUCCESS:
+      return { ...state, loading: false, error: false, currentTodos: payload };
+
+    case actions.GET_TODO_FAIL:
+      return { ...state, loading: false, error: payload };
     case actions.ADD_TODO_START:
       return { ...state, loading: true };
 

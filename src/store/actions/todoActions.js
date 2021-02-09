@@ -8,17 +8,31 @@ export const getTodos = (id) => async (
 ) => {
   const firestore = getFirestore();
   try {
-    console.log("starting");
-    const res = await firestore.collection("projects").doc(id).get();
-    // const todos = await firestore.collection("todos").doc(id).get();
-    console.log(res);
+   dispatch({type: actions.GET_TODO_START});
+    const todos = await firestore
+    .collection("todos")
+    .where("key", "==", id);
+
+  todos.onSnapshot((snapshot) => {
+    let todos = [];
+    snapshot.docs.forEach((doc) => {
+      todos.push({
+        id: doc.id,
+        todo: doc.data().todo,
+        key: doc.data().key,
+        createdAt: doc.data().createdAt,
+      });
+    });
+
+    dispatch({type: actions.GET_TODO_SUCCESS, payload: todos}); 
+  })
   } catch (err) {
-    console.log(err);
+    dispatch({type: actions.GET_TODO_FAIL, payload: err});
   }
 };
 
 //add todo
-export const addTodo = (data) => async (
+export const addTodo = (data, id) => async (
   dispatch,
   getState,
   { getFirestore }
@@ -28,27 +42,23 @@ export const addTodo = (data) => async (
 
   dispatch({ type: actions.ADD_TODO_START });
   try {
-    const res = await firestore.collection("todos").doc(userId).get();
-
-    const newTodo = {
+   const newTodo = {
       todo: data.todo,
-      id: new Date().valueOf(),
+      key: id,
+      userId: userId, 
+      createdAt: new Date().valueOf(),
     };
-    if (!res.data()) {
-      firestore
-        .collection("todos")
-        .doc(userId)
-        .set({
-          todos: [newTodo],
-        });
-    } else {
-      firestore
-        .collection("todos")
-        .doc(userId)
-        .update({
-          todos: [...res.data().todos, newTodo],
-        });
-    }
+  
+    let todo;
+    await firestore.collection('todos')
+    .add(newTodo)
+    .then((docRef) => {
+      todo = {
+        ...newTodo,
+        id: docRef.id
+      }
+    })
+    
     dispatch({ type: actions.ADD_TODO_SUCCESS });
     return true;
   } catch (err) {

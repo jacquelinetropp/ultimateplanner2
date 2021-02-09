@@ -12,15 +12,16 @@ const deleteStyles = {
 
 const Project = ({ getOneProject, project, id }) => {
   const [isDeleting, setIsDeleting] = useState(false);
-  // useEffect(() => {
-  //   getOneProject(id);
-  // }, [getOneProject]);
+  useEffect(() => {
+    getOneProject(id);
+  },);
+  console.log(project);
 
   return (
     <div>
       <p>
         {" "}
-        Hello, My id is {id}. My project name is {project.name}.{" "}
+        Hello, My id is {id}. My project name is {project.name}.
       </p>{" "}
       <i
         className="fas fa-trash-alt"

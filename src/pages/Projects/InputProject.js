@@ -43,7 +43,7 @@ const InputProject = ({
 }) => {
   const loadingText = project ? "Editing..." : "Adding...";
 
-  console.log(project);
+
   return (
     <Fragment>
       <Modal opened={opened} close={close}>

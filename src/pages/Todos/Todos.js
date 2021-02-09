@@ -6,13 +6,16 @@ import styled from "styled-components";
 
 import Heading from "../../components/UI/Headings/Headings";
 import InputTodo from "./InputTodo";
+import Todo from './Todo';
+
+import Loader from '../../components/UI/Loader/Loader';
 
 const Wrapper = styled.div`
   width: 100%;
   align-self: flex-start;
   height: 100%;
   min-height: calc(100vh - 6rem);
-  background-color: var(--color-mainLight);4
+  background-color: var(--color-mainLight);
   z-index: 5;
 `;
 
@@ -32,21 +35,30 @@ const Content = styled.div`
   margin-top: 2rem;
 `;
 
-const Todos = ({ id, logout, getTodos }) => {
+const Todos = ({ id, logout, getTodos, currentTodos, loading }) => {
   useEffect(() => {
-    actions.getTodos(id);
+    getTodos(id);
   }, []);
   const [isAdding, setIsAdding] = useState(false);
 
   let content;
 
-  // if (!todos) {
+  if (!currentTodos || loading) {
+    content = (
+      <Content>
+        <Loader />
+      </Content>
+    );
+  } 
+  // else if (!todos[userId] || !todos[userId].todos) {
   //   content = (
   //     <Content>
-  //       <Loader isWhite />
+  //       <Heading color="white" size="h2">
+  //         You have no todos!
+  //       </Heading>
   //     </Content>
-  //   );
-  // } else if (!todos[userId] || !todos[userId].todos) {
+  //   );}
+  //    else if (todos.length == 0) {
   //   content = (
   //     <Content>
   //       <Heading color="white" size="h2">
@@ -54,26 +66,16 @@ const Todos = ({ id, logout, getTodos }) => {
   //       </Heading>
   //     </Content>
   //   );
-  // } else if (todos[userId].todos.length === 0) {
-  //   content = (
-  //     <Content>
-  //       <Heading color="white" size="h2">
-  //         You have no todos!
-  //       </Heading>
-  //     </Content>
-  //   );
-  // } else {
-  //   content = (
-  //     <Content>
-  //       {todos[userId].todos
-  //         .slice(0)
-  //         .reverse()
-  //         .map((todo) => (
-  //           <Todo key={todo.id} todo={todo} />
-  //         ))}
-  //     </Content>
-  //   );
-  // }
+  // } 
+  else {
+    content = (
+      <Content>
+        {currentTodos.map((todo) => (
+            <Todo key={todo.id} todo={todo} />
+          ))}
+      </Content>
+    );
+  }
 
   return (
     <Wrapper>
@@ -96,11 +98,13 @@ const Todos = ({ id, logout, getTodos }) => {
     </Wrapper>
   );
 };
-const mapStateToProps = ({ firebase, firestore }) => ({
-  userId: firebase.auth.uid,
-  todos: firestore.data.todos,
-  requesting: firestore.status.requesting,
-  fetched: firestore.status.requested,
+const mapStateToProps = ({ firebase, firestore, todos }) => ({
+  // userId: firebase.auth.uid,
+  // todos: firestore.data.todos,
+  // requesting: firestore.status.requesting,
+  // fetched: firestore.status.requested,
+  currentTodos: todos.currentTodos,
+  loading: todos.loading
 });
 
 const mapDispatchToProps = {
