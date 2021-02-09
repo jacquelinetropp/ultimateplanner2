@@ -3,7 +3,7 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const config = {
-  apiKey: process.env.REACT_APP_APIKEY,
+  apiKey: "AIzaSyCqA59Pxda0idwJFhGjZ9y28_10JsORVqA",
   authDomain: "ultimateplanner-3837b.firebaseapp.com",
   projectId: "ultimateplanner-3837b",
   storageBucket: "ultimateplanner-3837b.appspot.com",
