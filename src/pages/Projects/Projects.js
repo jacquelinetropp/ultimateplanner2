@@ -14,8 +14,8 @@ const Wrapper = styled.div`
   align-self: flex-start;
   height: 100%;
   min-height: calc(100vh - 6rem);
-  background-color: var(--color-mainLight);4
-  z-index: 5;
+  background-color: rgba(0,97,186,.6);
+  z-index: 1;
 `;
 
 const InnerWrapper = styled.div`
@@ -26,12 +26,22 @@ const InnerWrapper = styled.div`
 `;
 
 const Content = styled.div`
-  display: flex;
+  /* display: flex;
   align-items: center;
   width: 100%;
   max-width: 60rem;
   flex-direction: column;
-  margin-top: 2rem;
+  margin-top: 2rem; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
+
+  @media ${(props) => props.theme.mediaQueries.medium} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media ${(props) => props.theme.mediaQueries.small} {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 const Projects = ({ getProjects, projects, loading, deleting, cleanUp }) => {

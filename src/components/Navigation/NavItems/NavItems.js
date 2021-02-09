@@ -19,8 +19,8 @@ const NavItems = ({ mobile, clicked, loggedIn }) => {
   if (loggedIn.uid) {
     links = (
       <Fragment>
-        <NavItem clicked={clicked} mobile={mobile} link="/">
-          Todos
+        <NavItem clicked={clicked} mobile={mobile} link="/projects">
+          Projects
         </NavItem>
         <NavItem clicked={clicked} mobile={mobile} link="/profile">
           Profile

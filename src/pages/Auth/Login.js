@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import * as actions from "../../store/actions/";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { withRouter } from 'react-router-dom';
 
 import Home from "../Home";
 
@@ -16,6 +17,7 @@ import Input from "../../components/UI/Forms/Input";
 import Button from "../../components/UI/Forms/Button";
 import Heading from "../../components/UI/Headings/Headings";
 import Message from "../../components/UI/Messages/Message";
+import { Redirect } from "react-router-dom";
 
 const MessageWrapper = styled.div`
   position: absolute;
@@ -33,7 +35,7 @@ const LoginSchema = Yup.object().shape({
     .min(8, "Too short"),
 });
 
-const Login = ({ loading, error, login, cleanUp }) => {
+const Login = ({ loading, error, login, cleanUp, history }) => {
   useEffect(() => {
     return () => {
       cleanUp();
@@ -48,7 +50,9 @@ const Login = ({ loading, error, login, cleanUp }) => {
       validationSchema={LoginSchema}
       onSubmit={async (values, { setSubmitting }) => {
         await login(values);
+        history.push('/projects');
         setSubmitting(false);
+     
       }}
     >
       {({ isSubmitting, isValid }) => (
@@ -107,4 +111,4 @@ const mapDispatchToProps = {
   cleanUp: actions.clean,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

@@ -29,7 +29,7 @@ const App = ({ loggedIn, emailVerified }) => {
     routes = (
       <Layout>
         <Switch>
-          <Route exact path="/" component={Projects} />
+          <Route exact path="/projects" component={Projects} />
           <Route path="/profile" component={Profile} />
           <Route path="/logout" component={Logout} />
           <Route path="/:id" component={TodosLayout} />
