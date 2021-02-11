@@ -1,13 +1,19 @@
 import React, {useEffect} from "react";
 import styled from "styled-components";
 import Todos from "../../pages/Todos/Todos";
-import Project from "../Projects/Project";
 import { useParams } from "react-router-dom";
 import {connect} from 'react-redux';
 import * as actions from "../../store/actions/index";
 
+import ProjectsSidebar from "../Projects/ProjectsSidebar";
+
 const TodosWrapper = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 200px auto;
+
+  @media ${(props) => props.theme.mediaQueries.small} {
+    grid-template-columns: 150px auto;
+  }
   width: 100%;
 `;
 
@@ -19,7 +25,7 @@ const TodosLayout = ({getOneProject}) => {
 
   return (
     <TodosWrapper>
-      <Project id={id} />
+      <ProjectsSidebar id={id} />
       <Todos id={id} />
     </TodosWrapper>
   );

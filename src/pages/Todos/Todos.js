@@ -15,8 +15,8 @@ const Wrapper = styled.div`
   align-self: flex-start;
   height: 100%;
   min-height: calc(100vh - 6rem);
-  background-color: var(--color-mainLight);
-  z-index: 5;
+  background-color: var(--color-white);
+  z-index: 1;
 `;
 
 const InnerWrapper = styled.div`
@@ -35,7 +35,7 @@ const Content = styled.div`
   margin-top: 2rem;
 `;
 
-const Todos = ({ id, logout, getTodos, currentTodos, loading }) => {
+const Todos = ({ id, getTodos, currentTodos, loading }) => {
   useEffect(() => {
     getTodos(id);
   }, []);
@@ -80,10 +80,10 @@ const Todos = ({ id, logout, getTodos, currentTodos, loading }) => {
   return (
     <Wrapper>
       <InnerWrapper>
-        <Heading nomargin size="h1" color="white">
+        <Heading nomargin size="h1">
           Your Todos
         </Heading>
-        <Heading size="h4" bold color="white">
+        <Heading size="h4" bold>
           All you have to do for now...
         </Heading>
         <Button color="main" contain onClick={() => setIsAdding(true)}>
@@ -91,9 +91,6 @@ const Todos = ({ id, logout, getTodos, currentTodos, loading }) => {
         </Button>
         <InputTodo opened={isAdding} close={() => setIsAdding(false)} />
         {content}
-        <Button color="main" onClick={() => logout()}>
-          Logout
-        </Button>
       </InnerWrapper>
     </Wrapper>
   );
@@ -108,8 +105,8 @@ const mapStateToProps = ({ firebase, firestore, todos }) => ({
 });
 
 const mapDispatchToProps = {
-  logout: actions.signOut,
+
   getTodos: actions.getTodos,
 };
 
-export default connect(null, mapDispatchToProps)(Todos);
+export default connect(mapStateToProps, mapDispatchToProps)(Todos);

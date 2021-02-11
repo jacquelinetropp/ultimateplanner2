@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   width: 100%;
   position: relative;
   padding: 4rem 3rem;
-  background-color: ${(props) => props.theme.colors.secondLight};
+  background-color: ${(props) => props.theme.colors.mainLight};
   box-shadow: 0rem 0.5rem 3.5rem var(--shadow);
   margin-bottom: 3.5rem;
   border-radius: 0.5rem;
@@ -29,7 +29,7 @@ const Controls = styled.div`
 `;
 
 const editStyles = {
-  color: "var(--color-main)",
+  color: "var(--color-white)",
   margin: "0 .5rem",
   cursor: "pointer",
 };

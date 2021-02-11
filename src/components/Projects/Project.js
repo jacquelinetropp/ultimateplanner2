@@ -14,8 +14,8 @@ const Project = ({ getOneProject, project, id }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   useEffect(() => {
     getOneProject(id);
-  },);
-  console.log(project);
+  }, []);
+  console.log(project.createdAt);
 
   return (
     <div>
@@ -38,7 +38,7 @@ const Project = ({ getOneProject, project, id }) => {
 };
 
 const mapStateToProps = ({ projects }) => ({
-  project: projects.projects,
+  project: projects.currentProject,
 });
 
 const mapDispatchToProps = {

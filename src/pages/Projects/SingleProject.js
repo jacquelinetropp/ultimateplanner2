@@ -9,7 +9,8 @@ const Wrapper = styled.div`
   width: 100%;
   position: relative;
   padding: 4rem 3rem;
-  background-color: ${(props) => props.theme.colors.secondLight};
+
+  background-color: ${(props) => (props.active ? "#630052" : "rgba(237, 0, 126, .7)")};
   box-shadow: 0rem 0.5rem 3.5rem var(--shadow);
   margin-bottom: 3.5rem;
   border-radius: 0.5rem;
@@ -34,7 +35,7 @@ const StyledLink = styled(Link)`
 `;
 
 const editStyles = {
-  color: "var(--color-main)",
+  color: "var(--color-white)",
   margin: "0 .5rem",
   cursor: "pointer",
 };
@@ -45,11 +46,11 @@ const deleteStyles = {
   cursor: "pointer",
 };
 
-const Project = ({ project }) => {
+const SingleProject = ({ project, active }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   return (
-    <Wrapper>
+    <Wrapper active={active}>
       <StyledLink to={`/${project.id}`}>{project.name}</StyledLink>
       <Controls>
         {" "}
@@ -78,4 +79,4 @@ const Project = ({ project }) => {
   );
 };
 
-export default Project;
+export default SingleProject;
