@@ -115,7 +115,7 @@ const mapStateToProps = ({ firebase, firestore, projects }) => ({
 
 const mapDispatchToProps = {
   getProjects: actions.getProjects,
-  cleanUp: actions.cleanUp,
+  cleanUp: actions.projectCleanUp,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectsSidebar);

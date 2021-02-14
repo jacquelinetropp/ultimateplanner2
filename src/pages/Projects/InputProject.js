@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
@@ -39,10 +39,9 @@ const InputProject = ({
   error,
   opened,
   close,
-  editProject,
+  editProject, cleanUp
 }) => {
   const loadingText = project ? "Editing..." : "Adding...";
-
 
   return (
     <Fragment>
@@ -58,16 +57,21 @@ const InputProject = ({
             project: project ? project.name : "",
           }}
           validationSchema={ProjectSchema}
-          onSubmit={async (values, { setSubmitting, resetForm }) => {
+          onSubmit={async (values, { setSubmitting, resetForm }) => {  
+            let mounted = true;
             // send our project
+            if (mounted) {
             const res = project
               ? await editProject(project.id, values)
               : await addProject(values);
-            setSubmitting(false);
+            setSubmitting(false);              
             if (res) {
               close();
             }
-            resetForm();
+            resetForm();  }
+            return () => {
+              mounted = false;
+            }
           }}
         >
           {({ values, handleChange, isSubmitting, isValid, resetForm }) => (
@@ -123,6 +127,7 @@ const mapStateToProps = ({ projects }) => ({
 const mapDispatchToProps = {
   addProject: actions.addProject,
   editProject: actions.editProject,
+  cleanUp: actions.projectCleanUp
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InputProject);

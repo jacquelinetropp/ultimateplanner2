@@ -10,11 +10,12 @@ const deleteStyles = {
   cursor: "pointer",
 };
 
-const Project = ({ getOneProject, project, id }) => {
+const Project = ({ getOneProject, project, id, cleanUp }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   useEffect(() => {
     getOneProject(id);
   }, []);
+
   console.log(project.createdAt);
 
   return (
@@ -43,6 +44,7 @@ const mapStateToProps = ({ projects }) => ({
 
 const mapDispatchToProps = {
   getOneProject: actions.getOneProject,
+  cleanup: actions.projectCleanUp
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Project);

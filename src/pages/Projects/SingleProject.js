@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   position: relative;
   padding: 4rem 3rem;
 
-  background-color: ${(props) => (props.active ? "#630052" : "rgba(237, 0, 126, .7)")};
+  background-color: ${(props) => (props.active ? "rgba(237, 0, 126, .7)" : "#630052 ")};
   box-shadow: 0rem 0.5rem 3.5rem var(--shadow);
   margin-bottom: 3.5rem;
   border-radius: 0.5rem;

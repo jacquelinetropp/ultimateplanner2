@@ -50,9 +50,6 @@ export const signIn = (data) => async (dispatch, getState, { getFirebase }) => {
   dispatch({ type: actions.AUTH_END });
 };
 
-export const clean = () => ({
-  type: actions.CLEAN_UP,
-});
 
 //Verify Email actions
 export const verifyEmail = () => async (
@@ -137,3 +134,7 @@ export const deleteUser = () => async (
     dispatch({ type: actions.DELETE_FAIL, payload: err.message });
   }
 };
+
+export const clean = () => ({
+  type: actions.CLEAN_UP,
+});

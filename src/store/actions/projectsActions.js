@@ -91,7 +91,7 @@ export const addProject = (data) => async (
   }
 };
 
-//edit todo
+//edit project
 export const editProject = (id, data) => async (
   dispatch,
   getState,
@@ -105,11 +105,9 @@ export const editProject = (id, data) => async (
     // const projects = res.data().projects;
     // const index = projects.findIndex((project) => project.id === id);
     // projects[index].project = data.project;
-    const update = {
-      name: data.name,
-    };
+    const update = data.project;
+    console.log(update);
 
-    console.log(data);
     await firestore.collection("projects").doc(id).update({
       name: update,
     });
@@ -129,7 +127,7 @@ export const deleteProject = (id) => async (
 ) => {
   const firestore = getFirestore();
   const projects = getState().projects.projects;
-  console.log("trying to delete");
+
   dispatch({ type: actions.DELETE_PROJECT_START });
   try {
     firestore.collection("projects").doc(id).delete();
@@ -143,6 +141,6 @@ export const deleteProject = (id) => async (
   }
 };
 
-export const cleanUp = () => ({
+export const projectCleanUp = () => ({
   type: actions.PROJECT_CLEANUP,
 });

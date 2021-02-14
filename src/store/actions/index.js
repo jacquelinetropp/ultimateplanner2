@@ -17,5 +17,5 @@ export {
   getProjects,
   deleteProject,
   getOneProject,
-  cleanUp,
+  projectCleanUp,
 } from "./projectsActions";
