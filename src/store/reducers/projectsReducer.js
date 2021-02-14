@@ -80,18 +80,6 @@ export default (state = initialState, { type, payload }) => {
         },
       };
 
-    case actions.DELETE_PROJECT_START:
-      return {
-        ...state,
-        projects: {
-          ...state.projects,
-          payload,
-        },
-        deleteProject: {
-          ...state.deleteProject,
-          loading: true,
-        },
-      };
 
     case actions.DELETE_PROJECT_SUCCESS:
       return {

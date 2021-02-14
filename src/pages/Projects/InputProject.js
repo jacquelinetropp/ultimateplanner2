@@ -42,6 +42,7 @@ const InputProject = ({
   editProject, cleanUp
 }) => {
   const loadingText = project ? "Editing..." : "Adding...";
+ 
 
   return (
     <Fragment>
@@ -69,9 +70,9 @@ const InputProject = ({
               close();
             }
             resetForm();  }
-            return () => {
-              mounted = false;
-            }
+
+            mounted = false;
+  
           }}
         >
           {({ values, handleChange, isSubmitting, isValid, resetForm }) => (

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import {connect} from 'react-redux';
 
 import styled from "styled-components";
 import DeleteProject from "./DeleteProject";
 import InputProject from "./InputProject";
+import * as actions from "../../store/actions";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -46,9 +48,11 @@ const deleteStyles = {
   cursor: "pointer",
 };
 
-const SingleProject = ({ project, active }) => {
+const SingleProject = ({ project, active, cleanUp, editProject }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+
+
   return (
     <Wrapper active={active}>
       <StyledLink to={`/${project.id}`}>{project.name}</StyledLink>
@@ -79,4 +83,9 @@ const SingleProject = ({ project, active }) => {
   );
 };
 
-export default SingleProject;
+const mapDispatchToProps = {
+  editProject: actions.editProject,
+  cleanUp: actions.projectCleanUp
+};
+
+export default connect(null, mapDispatchToProps)(SingleProject);

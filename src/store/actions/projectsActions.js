@@ -10,7 +10,6 @@ export const getProjects = () => async (
   const userId = getState().firebase.auth.uid;
   dispatch({ type: actions.GET_PROJECT_START });
   try {
-    let projects = [];
 
     const projectsMos = await firestore
       .collection("projects")
@@ -98,7 +97,6 @@ export const editProject = (id, data) => async (
   { getFirestore }
 ) => {
   const firestore = getFirestore();
-  const userId = getState().firebase.auth.uid;
   dispatch({ type: actions.ADD_PROJECT_START });
   try {
     // const res = await firestore.collection("projects").doc(userId).get();
