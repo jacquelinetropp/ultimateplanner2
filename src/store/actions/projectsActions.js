@@ -99,10 +99,6 @@ export const editProject = (id, data) => async (
   const firestore = getFirestore();
   dispatch({ type: actions.ADD_PROJECT_START });
   try {
-    // const res = await firestore.collection("projects").doc(userId).get();
-    // const projects = res.data().projects;
-    // const index = projects.findIndex((project) => project.id === id);
-    // projects[index].project = data.project;
     const update = data.project;
     console.log(update);
 
