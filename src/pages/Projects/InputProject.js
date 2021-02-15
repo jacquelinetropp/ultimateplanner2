@@ -39,9 +39,11 @@ const InputProject = ({
   error,
   opened,
   close,
-  editProject, cleanUp
+  editProject, cleanUp, getProjects
 }) => {
   const loadingText = project ? "Editing..." : "Adding...";
+  const [submitForm, setSubmitForm] = useState(false);
+
  
 
   return (
@@ -69,9 +71,9 @@ const InputProject = ({
             if (res) {
               close();
             }
-            resetForm();  }
-
-            mounted = false;
+            resetForm();  
+   
+          }
   
           }}
         >
@@ -128,7 +130,8 @@ const mapStateToProps = ({ projects }) => ({
 const mapDispatchToProps = {
   addProject: actions.addProject,
   editProject: actions.editProject,
-  cleanUp: actions.projectCleanUp
+  cleanUp: actions.projectCleanUp,
+  getProjects: actions.getProjects
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InputProject);
