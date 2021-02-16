@@ -63,6 +63,7 @@ export const addTodo = (data, id) => async (
     return true;
   } catch (err) {
     dispatch({ type: actions.ADD_TODO_FAIL, payload: err.message });
+    console.log(err);
   }
 };
 

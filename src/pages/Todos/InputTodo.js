@@ -60,9 +60,9 @@ const InputTodo = ({
             // send our todo
             const res = todo
               ? await editTodo(todo.id, values)
-              : await addTodo(values, id);
-         
-            // resetForm();
+              : (await addTodo(values, id), close());
+              // close();
+              // resetForm();
           }}
         >
           {({ isSubmitting, isValid, resetForm }) => (

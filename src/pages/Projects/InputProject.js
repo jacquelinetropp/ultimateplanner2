@@ -59,20 +59,16 @@ const InputProject = ({
           }}
           validationSchema={ProjectSchema}
           onSubmit={async (values, { setSubmitting, resetForm }) => {  
-            let mounted = true;
-            // send our project
-            if (mounted) {
+        
+            // send our project           
             const res = project
               ? await editProject(project.id, values)
-              : await addProject(values);
-              
-            if (res) {
-            // setSubmitting(false);     
-              // close();
-            }
+              : (await addProject(values), close() );
+            
+
             // resetForm();  
         
-          }
+          
   
           }}
         >
