@@ -125,8 +125,8 @@ export const deleteProject = (id) => async (
   dispatch({ type: actions.DELETE_PROJECT_START });
   try {
     firestore.collection("projects").doc(id).delete();
-    projects.filter((project) => project.id !== id);
-    getProjects();
+
+ 
 
     dispatch({ type: actions.DELETE_PROJECT_SUCCESS });
   } catch (err) {

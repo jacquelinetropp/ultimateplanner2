@@ -76,12 +76,8 @@ export const deleteTodo = (id) => async (
   const userId = getState().firebase.auth.uid;
   dispatch({ type: actions.DELETE_TODO_START });
   try {
-    const res = await firestore.collection("todos").doc(userId).get();
-    const previousTodos = res.data().todos;
-    const newTodos = previousTodos.filter((todo) => todo.id !== id);
-    await firestore.collection("todos").doc(userId).update({
-      todos: newTodos,
-    });
+  
+    firestore.collection('todos').doc(id).delete();
     dispatch({ type: actions.DELETE_TODO_SUCCESS });
   } catch (err) {
     console.log(err);
@@ -99,13 +95,10 @@ export const editTodo = (id, data) => async (
   const userId = getState().firebase.auth.uid;
   dispatch({ type: actions.ADD_TODO_START });
   try {
-    const res = await firestore.collection("todos").doc(userId).get();
-    const todos = res.data().todos;
-    const index = todos.findIndex((todo) => todo.id === id);
-    todos[index].todo = data.todo;
-
-    await firestore.collection("todos").doc(userId).update({
-      todos,
+    const update = data.todo;
+   
+    await firestore.collection("todos").doc(id).update({
+      todo: update,
     });
     dispatch({ type: actions.ADD_TODO_SUCCESS });
     return true;

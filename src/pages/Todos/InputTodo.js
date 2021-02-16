@@ -61,11 +61,8 @@ const InputTodo = ({
             const res = todo
               ? await editTodo(todo.id, values)
               : await addTodo(values, id);
-            setSubmitting(false);
-            if (res) {
-              close();
-            }
-            resetForm();
+         
+            // resetForm();
           }}
         >
           {({ isSubmitting, isValid, resetForm }) => (
