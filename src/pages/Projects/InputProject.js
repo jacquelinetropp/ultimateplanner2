@@ -42,9 +42,7 @@ const InputProject = ({
   editProject, cleanUp, getProjects
 }) => {
   const loadingText = project ? "Editing..." : "Adding...";
-  const [submitForm, setSubmitForm] = useState(false);
-
- 
+  const [submitForm, setSubmitForm] = useState(false); 
 
   return (
     <Fragment>

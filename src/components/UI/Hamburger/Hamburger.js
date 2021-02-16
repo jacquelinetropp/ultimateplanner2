@@ -15,7 +15,7 @@ const StyledHamb = styled.div`
     position: absolute;
     height: 4.5px;
     width: 100%;
-    background: var(--color-white);
+    background: ${(props) => (props.projects ? "var(--color-main)" : "var(--color-white)")};
     border-radius: 9px;
     opacity: 1;
     left: 0;
@@ -44,9 +44,9 @@ const StyledHamb = styled.div`
   }
 `;
 
-const Hamburger = ({ opened, clicked }) => {
+const Hamburger = ({ opened, clicked, projects }) => {
   return (
-    <StyledHamb onClick={clicked} opened={opened}>
+    <StyledHamb onClick={clicked} opened={opened} projects={projects}>
       <span />
       <span />
       <span />

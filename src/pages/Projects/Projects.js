@@ -44,7 +44,7 @@ const Content = styled.div`
   }
 `;
 
-const Projects = ({ getProjects, projects, loading, deleting, cleanUp }) => {
+const Projects = ({ getProjects, projects, loading, deleting }) => {
   useEffect(() => {
     getProjects();
   }, []);
@@ -60,22 +60,6 @@ const Projects = ({ getProjects, projects, loading, deleting, cleanUp }) => {
       </Content>
     );
   }
-  // } else if (!projects[userId] || !projects[userId].projects) {
-  //   content = (
-  //     <Content>
-  //       <Heading color="white" size="h2">
-  //         You have no projects!
-  //       </Heading>
-  //     </Content>
-  //   );
-  // } else if (projects[userId].projects.length === 0) {
-  //   content = (
-  //     <Content>
-  //       <Heading color="white" size="h2">
-  //         You have no projects!
-  //       </Heading>
-  //     </Content>
-  //   ); }
   else {
     content = (
       <Content>
@@ -113,7 +97,6 @@ const mapStateToProps = ({ firebase, firestore, projects }) => ({
 
 const mapDispatchToProps = {
   getProjects: actions.getProjects,
-  cleanUp: actions.projectCleanUp,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Projects);

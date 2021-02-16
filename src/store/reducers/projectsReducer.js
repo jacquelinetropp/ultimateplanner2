@@ -15,7 +15,7 @@ const initialState = {
   },
 };
 
-export default (state = initialState, { type, payload }) => {
+const projectReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case actions.ADD_PROJECT_START:
       return { ...state, loading: true };
@@ -123,3 +123,5 @@ export default (state = initialState, { type, payload }) => {
       return state;
   }
 };
+
+export default projectReducer;

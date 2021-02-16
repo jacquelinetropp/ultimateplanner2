@@ -13,7 +13,7 @@ const LogoWrapper = styled(Link)`
 `;
 
 const Logo = () => {
-  return <LogoWrapper to="/projects">Productivity</LogoWrapper>;
+  return <LogoWrapper to="/">Productivity</LogoWrapper>;
 };
 
 export default Logo;

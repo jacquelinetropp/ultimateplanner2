@@ -60,9 +60,8 @@ const SignUp = ({ signUp, loading, error, cleanUp }) => {
         confirmPassword: "",
       }}
       validationSchema={SignUpSchema}
-      onSubmit={async (values, { setSubmitting }) => {
+      onSubmit={async (values) => {
         await signUp(values);
-        setSubmitting(false);
       }}
     >
       {({ isSubmitting, isValid }) => (

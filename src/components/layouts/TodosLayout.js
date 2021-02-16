@@ -6,13 +6,14 @@ import {connect} from 'react-redux';
 import * as actions from "../../store/actions/index";
 
 import ProjectsSidebar from "../Projects/ProjectsSidebar";
+import ProjectsDrawer from "../../pages/Projects/ProjectsDrawer";
 
 const TodosWrapper = styled.div`
   display: grid;
   grid-template-columns: 200px auto;
 
   @media ${(props) => props.theme.mediaQueries.small} {
-    grid-template-columns: 150px auto;
+    grid-template-columns: minmax(50px, 150px) auto;
   }
   width: 100%;
 `;
@@ -25,6 +26,7 @@ const TodosLayout = ({getOneProject}) => {
 
   return (
     <TodosWrapper>
+      <ProjectsDrawer id={id}/>
       <ProjectsSidebar id={id} />
       <Todos id={id} />
     </TodosWrapper>

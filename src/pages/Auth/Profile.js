@@ -88,9 +88,8 @@ const Profile = ({
           confirmPassword: "",
         }}
         validationSchema={ProfileSchema}
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={async (values) => {
           await editProfile(values);
-          setSubmitting(false);
         }}
       >
         {({ isSubmitting, isValid }) => (

@@ -29,7 +29,7 @@ const App = ({ loggedIn, emailVerified }) => {
     routes = (
       <Layout>
         <Switch>
-          <Route exact path="/projects" component={Projects} />
+          <Route exact path="/" component={Projects} />
           <Route path="/profile" component={Profile} />
           <Route path="/logout" component={Logout} />
           <Route path="/:id" component={TodosLayout} />
@@ -40,7 +40,7 @@ const App = ({ loggedIn, emailVerified }) => {
   } else {
     routes = (
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Login} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path="/recover" component={RecoverPassword} />

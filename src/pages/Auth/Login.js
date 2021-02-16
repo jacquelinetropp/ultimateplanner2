@@ -48,11 +48,9 @@ const Login = ({ loading, error, login, cleanUp, history }) => {
         password: "",
       }}
       validationSchema={LoginSchema}
-      onSubmit={async (values, { setSubmitting }) => {
+      onSubmit={async (values) => {
         await login(values);
-        history.push('/projects');
-        setSubmitting(false);
-     
+        history.push('/');     
       }}
     >
       {({ isSubmitting, isValid }) => (
