@@ -123,6 +123,15 @@ export const deleteProject = (id) => async (
   dispatch({ type: actions.DELETE_PROJECT_START });
   try {
 
+    firestore.collection("todos").where("key", "==", id).get()
+    .then(querySnapshot => {
+      let batch = firestore.batch();
+      querySnapshot.forEach(doc => {
+        batch.delete(doc.ref)
+      })
+      return batch.commit()
+    });
+
     firestore.collection("projects").doc(id).delete();
 
     dispatch({ type: actions.DELETE_PROJECT_SUCCESS });

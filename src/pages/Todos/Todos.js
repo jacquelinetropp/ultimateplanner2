@@ -9,7 +9,6 @@ import InputTodo from "./InputTodo";
 import Todo from './Todo';
 
 import Loader from '../../components/UI/Loader/Loader';
-import { useParams } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -79,11 +78,8 @@ const Todos = ({ id, getTodos, currentTodos, loading }) => {
     </Wrapper>
   );
 };
-const mapStateToProps = ({ firebase, firestore, todos }) => ({
-  // userId: firebase.auth.uid,
-  // todos: firestore.data.todos,
-  // requesting: firestore.status.requesting,
-  // fetched: firestore.status.requested,
+const mapStateToProps = ({ todos }) => ({
+
   currentTodos: todos.currentTodos,
   loading: todos.loading
 });

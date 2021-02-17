@@ -74,7 +74,6 @@ export const deleteTodo = (id) => async (
   { getFirestore }
 ) => {
   const firestore = getFirestore();
-  const userId = getState().firebase.auth.uid;
   dispatch({ type: actions.DELETE_TODO_START });
   try {
   
@@ -93,7 +92,6 @@ export const editTodo = (id, data) => async (
   { getFirestore }
 ) => {
   const firestore = getFirestore();
-  const userId = getState().firebase.auth.uid;
   dispatch({ type: actions.ADD_TODO_START });
   try {
     const update = data.todo;
