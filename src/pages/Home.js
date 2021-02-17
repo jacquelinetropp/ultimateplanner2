@@ -1,6 +1,9 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navigation/Navbar/Navbar";
+import SideDrawer from "../components/Navigation/SideDrawer/SideDrawer";
+
+import { connect } from "react-redux";
 
 const HomeWrapper = styled.div`
   position: relative;
@@ -21,10 +24,11 @@ const VideoContainer = styled.div`
   opacity: 0.6;
 `;
 
-const Home = () => {
+const Home = ({loggedIn}) => {
   return (
     <Fragment>
       <Navbar loggedIn transparent />
+      <SideDrawer loggedIn={loggedIn} transparent/> 
       <HomeWrapper>
         <VideoContainer>
           <video autoPlay loop muted>
@@ -36,4 +40,8 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = ({ firebase }) => ({
+  loggedIn: firebase.auth,
+});
+
+export default connect(mapStateToProps)(Home);

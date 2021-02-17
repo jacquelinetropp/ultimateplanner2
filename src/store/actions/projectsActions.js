@@ -120,7 +120,6 @@ export const deleteProject = (id) => async (
   { getFirestore }
 ) => {
   const firestore = getFirestore();
-  const projects = getState().projects.projects;
 
   dispatch({ type: actions.DELETE_PROJECT_START });
   try {

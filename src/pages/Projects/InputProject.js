@@ -63,12 +63,8 @@ const InputProject = ({
             // send our project           
             const res = project
               ? await editProject(project.id, values)
-              : (await addProject(values), close() );
-            
-
-            // resetForm();  
-        
-          
+              : (await addProject(values), close(), resetForm() );
+              
   
           }}
         >

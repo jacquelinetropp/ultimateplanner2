@@ -6,7 +6,7 @@ import Hamburger from "../../UI/Hamburger/Hamburger";
 
 const FixedWrapper = styled.div`
   position: fixed;
-  background-color: ${(props) => props.theme.colors.main};
+  background-color: ${(props) => props.transparent ? "transparent" : "var(--color-main)"};
   z-index: 10;
   padding: 0rem 2rem;
   top: 0;
@@ -47,11 +47,11 @@ const Menu = styled.div`
   }
 `;
 
-const SideDrawer = ({ loggedIn }) => {
+const SideDrawer = ({ loggedIn, transparent }) => {
   const [isOpened, setIsOpened] = useState(false);
   return (
     <Fragment>
-      <FixedWrapper>
+      <FixedWrapper transparent={transparent}>
         <Wrapper>
           <Logo />
           <Hamburger opened={isOpened} clicked={() => setIsOpened(!isOpened)} />

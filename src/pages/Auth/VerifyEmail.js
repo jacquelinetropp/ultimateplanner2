@@ -29,14 +29,15 @@ const VerifyEmail = ({ sendVerification, error, loading, cleanUp }) => {
       cleanUp();
     };
   }, [cleanUp]);
+  
 
   return (
     <FormWrapper>
       <Wrapper>
-        <Heading noMargin color="white" size="h1">
+        <Heading noMargin size="h1">
           Verify your email
         </Heading>
-        <Heading color="white" bold size="h4">
+        <Heading bold size="h4">
           Go to your email inbox, and please verify your email.
         </Heading>
         <Button

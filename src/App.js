@@ -1,11 +1,10 @@
 import React, { Fragment } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Layout from "./components/layouts/Layout";
 import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
-import Home from "./pages/Home";
 import Logout from "./pages/Auth/Logout";
 import VerifyEmail from "./pages/Auth/VerifyEmail";
 import RecoverPassword from "./pages/Auth/RecoverPassword";
@@ -30,9 +29,15 @@ const App = ({ loggedIn, emailVerified }) => {
       <Layout>
         <Switch>
           <Route exact path="/" component={Projects} />
+          <Route exact path ="/verify-email" 
+          render={() =>
+            emailVerified ? <Redirect to="/" /> : <Profile />
+          }
+          />
           <Route path="/profile" component={Profile} />
           <Route path="/logout" component={Logout} />
           <Route path="/:id" component={TodosLayout} />
+        
           <Redirect to="/" />
         </Switch>
       </Layout>
@@ -56,4 +61,4 @@ const mapStateToProps = ({ firebase }) => ({
   emailVerified: firebase.auth.emailVerified,
 });
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));

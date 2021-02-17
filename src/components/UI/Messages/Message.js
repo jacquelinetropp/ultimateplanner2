@@ -2,8 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const P = styled.p`
-  ont-weight: 700;
+  font-weight: 700;
   font-size: 1.2rem;
+  background-color: rgba(255, 255, 255, .4);
+  padding: 1rem;
+  border-radius: 10px; 
   color: ${({ error, success }) => {
     if (error) return "var(--color-errorRed)";
     if (success) return "green";
