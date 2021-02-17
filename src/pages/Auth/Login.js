@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
 import * as actions from "../../store/actions/";
@@ -17,7 +17,6 @@ import Input from "../../components/UI/Forms/Input";
 import Button from "../../components/UI/Forms/Button";
 import Heading from "../../components/UI/Headings/Headings";
 import Message from "../../components/UI/Messages/Message";
-import { Redirect } from "react-router-dom";
 
 const MessageWrapper = styled.div`
   position: absolute;

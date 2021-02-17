@@ -46,7 +46,6 @@ export const getOneProject = (id) => async (
     const snapshot = await firestore.collection("projects").doc(id).get();
 
     const project = await snapshot.data();
-    console.log(project);
 
     dispatch({ type: actions.ONE_PROJECT_SUCCESS, payload: project });
   } catch (err) {
@@ -123,6 +122,7 @@ export const deleteProject = (id) => async (
 
   dispatch({ type: actions.DELETE_PROJECT_START });
   try {
+
     firestore.collection("projects").doc(id).delete();
 
     dispatch({ type: actions.DELETE_PROJECT_SUCCESS });

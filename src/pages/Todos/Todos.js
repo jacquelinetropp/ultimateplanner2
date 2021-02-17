@@ -9,6 +9,7 @@ import InputTodo from "./InputTodo";
 import Todo from './Todo';
 
 import Loader from '../../components/UI/Loader/Loader';
+import { useParams } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -50,23 +51,6 @@ const Todos = ({ id, getTodos, currentTodos, loading }) => {
       </Content>
     );
   } 
-  // else if (!todos[userId] || !todos[userId].todos) {
-  //   content = (
-  //     <Content>
-  //       <Heading color="white" size="h2">
-  //         You have no todos!
-  //       </Heading>
-  //     </Content>
-  //   );}
-  //    else if (todos.length == 0) {
-  //   content = (
-  //     <Content>
-  //       <Heading color="white" size="h2">
-  //         You have no todos!
-  //       </Heading>
-  //     </Content>
-  //   );
-  // } 
   else {
     content = (
       <Content>
@@ -81,7 +65,7 @@ const Todos = ({ id, getTodos, currentTodos, loading }) => {
     <Wrapper>
       <InnerWrapper>
         <Heading nomargin size="h1">
-          Your Todos
+          Your To-dos
         </Heading>
         <Heading size="h4" bold>
           All you have to do for now...

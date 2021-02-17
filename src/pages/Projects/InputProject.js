@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
@@ -42,7 +42,6 @@ const InputProject = ({
   editProject, cleanUp, getProjects
 }) => {
   const loadingText = project ? "Editing..." : "Adding...";
-  const [submitForm, setSubmitForm] = useState(false); 
 
   return (
     <Fragment>
@@ -63,8 +62,7 @@ const InputProject = ({
             // send our project           
             const res = project
               ? await editProject(project.id, values)
-              : (await addProject(values), close(), resetForm() );
-              
+              : (await addProject(values), close(), resetForm() );              
   
           }}
         >

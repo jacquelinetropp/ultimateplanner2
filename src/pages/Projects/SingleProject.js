@@ -48,14 +48,14 @@ const deleteStyles = {
   cursor: "pointer",
 };
 
-const SingleProject = ({ project, active, cleanUp, editProject }) => {
+const SingleProject = ({ project, active, getTodos }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
 
   return (
     <Wrapper active={active}>
-      <StyledLink to={`/${project.id}`}>{project.name}</StyledLink>
+      <StyledLink to={`/${project.id}`} onClick={() => getTodos(project.id)}>{project.name}</StyledLink>
       <Controls>
         {" "}
         <i
@@ -85,7 +85,8 @@ const SingleProject = ({ project, active, cleanUp, editProject }) => {
 
 const mapDispatchToProps = {
   editProject: actions.editProject,
-  cleanUp: actions.projectCleanUp
+  cleanUp: actions.projectCleanUp,
+  getTodos: actions.getTodos
 };
 
 export default connect(null, mapDispatchToProps)(SingleProject);
