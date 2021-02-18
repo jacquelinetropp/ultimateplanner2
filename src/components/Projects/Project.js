@@ -16,8 +16,6 @@ const Project = ({ getOneProject, project, id, cleanUp }) => {
     getOneProject(id);
   }, []);
 
-  console.log(project.createdAt);
-
   return (
     <div>
       <p>

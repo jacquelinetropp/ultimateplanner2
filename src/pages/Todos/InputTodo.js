@@ -46,10 +46,10 @@ const InputTodo = ({
     <Fragment>
       <Modal opened={opened} close={close}>
         <Heading noMargin size="h1" color="white">
-          {todo ? "Edit your todo" : "Add your new Todo"}
+          {todo ? "Edit your task" : "Add your new task"}
         </Heading>
         <Heading bold size="h4" color="white">
-          {todo ? "Change your todo here" : "Type your todo here"}
+          {todo ? "Change your task here" : "Type your task here"}
         </Heading>
         <Formik
           initialValues={{
@@ -70,7 +70,7 @@ const InputTodo = ({
               <Field
                 type="text"
                 name="todo"
-                placeholder="Write your todo..."
+                placeholder="Write your task..."
                 component={Input}
               />
               <ButtonsWrapper>
@@ -81,7 +81,7 @@ const InputTodo = ({
                   disabled={!isValid || isSubmitting}
                   loading={loading ? loadingText : null}
                 >
-                  {todo ? "Edit Todo" : "Add Todo"}
+                  {todo ? "Edit Task" : "Add Task"}
                 </Button>
                 <Button
                   type="button"

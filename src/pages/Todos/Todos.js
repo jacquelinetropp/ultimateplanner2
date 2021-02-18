@@ -12,10 +12,8 @@ import Loader from '../../components/UI/Loader/Loader';
 
 const Wrapper = styled.div`
   width: 100%;
-  align-self: flex-start;
-  height: 100%;
   min-height: calc(100vh - 6rem);
-  background-color: var(--color-white);
+  background-color: rgba(255,230,198, .4);
   z-index: 1;
 `;
 
@@ -43,13 +41,20 @@ const Todos = ({ id, getTodos, currentTodos, loading }) => {
 
   let content;
 
-  if (!currentTodos || loading) {
+  if (!currentTodos && loading) {
     content = (
       <Content>
         <Loader />
       </Content>
     );
-  } 
+  } else if (currentTodos.length === 0) {
+    content = (
+      <Content>
+      <Heading size="h4" bold>
+        No Tasks. Please Add a task.
+      </Heading> 
+    </Content>)
+  }
   else {
     content = (
       <Content>
@@ -64,13 +69,13 @@ const Todos = ({ id, getTodos, currentTodos, loading }) => {
     <Wrapper>
       <InnerWrapper>
         <Heading nomargin size="h1">
-          Your To-dos
+          Your Tasks
         </Heading>
         <Heading size="h4" bold>
           All you have to do for now...
         </Heading>
         <Button color="main" contain onClick={() => setIsAdding(true)}>
-          Add Todo
+          Add Task
         </Button>
         <InputTodo opened={isAdding} close={() => setIsAdding(false)} />
         {content}

@@ -28,10 +28,11 @@ const Heading3 = styled.h3`
 
 const Heading4 = styled.h4`
   font-size: 1.3rem;
+  grid-column: ${(props) => props.noProjects ? "1/-1" : ""};
   ${baseStyle}
 `;
 
-const Heading = ({ children, color, noMargin, bold, size }) => {
+const Heading = ({ children, color, noMargin, bold, size, noProjects }) => {
   if (size === "h1")
     return (
       <Heading1 noMargin={noMargin} bold={bold} color={color}>
@@ -55,7 +56,7 @@ const Heading = ({ children, color, noMargin, bold, size }) => {
 
   if (size === "h4")
     return (
-      <Heading4 noMargin={noMargin} bold={bold} color={color}>
+      <Heading4 noMargin={noMargin} bold={bold} color={color} noProjects={noProjects}>
         {children}
       </Heading4>
     );

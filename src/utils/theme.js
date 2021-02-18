@@ -5,6 +5,7 @@ const theme = {
     mainLight: "#00328F",
     second: "#630052",
     secondLight: "rgba(237, 0, 126, .7)",
+    tertiary: "#FFE6C6",
     textColor: "#333",
     whiteColor: "#fff",
     errorRed: "#ff3838",

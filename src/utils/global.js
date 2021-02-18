@@ -23,6 +23,7 @@ const GlobalStyles = createGlobalStyle`
     --color-mainLight: ${(props) => props.theme.colors.mainLight};
     --color-second: ${(props) => props.theme.colors.second};
     --color-secondLight: ${(props) => props.theme.colors.secondLight};
+    --color-tertiary: ${(props) => props.theme.colors.tertiary};
     --color-text: ${(props) => props.theme.colors.textColor};
     --color-white: ${(props) => props.theme.colors.whiteColor};
     --color-errorRed: ${(props) => props.theme.colors.errorRed};

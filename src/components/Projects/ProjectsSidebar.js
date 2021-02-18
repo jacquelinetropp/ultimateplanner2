@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Button from "../UI/Forms/Button";
@@ -12,9 +13,7 @@ import SingleProject from "../../pages/Projects/SingleProject";
 import Loader from "../UI/Loader/Loader";
 
 const Wrapper = styled.div`
-  width: 100%;
-  align-self: flex-start;
-  height: 100%;
+ 
   min-height: calc(100vh - 6rem);
   background-color: ${(props) => props.mobile ? "none" : "rgba(0,97,186,.6);"};
 

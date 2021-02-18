@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   position: relative;
   padding: 4rem 3rem;
 
-  background-color: ${(props) => (props.active ? "rgba(237, 0, 126, .7)" : "#630052 ")};
+  background-color: ${(props) => (props.active ? "var(--color-second)" : "var(--color-mainLight) ")};
   box-shadow: 0rem 0.5rem 3.5rem var(--shadow);
   margin-bottom: 3.5rem;
   border-radius: 0.5rem;
@@ -20,7 +20,12 @@ const Wrapper = styled.div`
   font-weight: 700;
   text-align: center;
   color: var(--color-white);
+  border: 3px solid var(--color-main);
   z-index: 0;
+
+  &:hover {
+    background-color: var(--color-second);
+  }
 `;
 const Controls = styled.div`
   position: absolute;
@@ -33,7 +38,7 @@ const Controls = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  color: var(--color-white);
+  color: ${(props) => (props.active ? "var(--color-white)" : "var(--color-white) ")};
 `;
 
 const editStyles = {
@@ -48,14 +53,14 @@ const deleteStyles = {
   cursor: "pointer",
 };
 
-const SingleProject = ({ project, active, getTodos }) => {
+const SingleProject = ({ project, active, getTodos, home }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
 
   return (
     <Wrapper active={active}>
-      <StyledLink to={`/${project.id}`} onClick={() => getTodos(project.id)}>{project.name}</StyledLink>
+      <StyledLink active={active} to={`/${project.id}`} onClick={() => getTodos(project.id)}>{project.name}</StyledLink>
       <Controls>
         {" "}
         <i

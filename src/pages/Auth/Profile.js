@@ -31,14 +31,20 @@ const ProfileSchema = Yup.object().shape({
   ),
 });
 
+const ProfileWrapper = styled.div`
+  background-color: var(--color-tertiary);
+`
+
 const MessageWrapper = styled.div`
-  position: absolute;
-  bottom: 0;
+
 `;
 
-const DeleteWrapper = styled.div`
+const DeleteWrapper = styled.button`
   cursor: pointer;
   color: var(--color-errorRed);
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  border: 2px solid var(--color-errorRed);
   font-size: 1.3rem;
   font-weight: 700;
   margin-top: 2rem;
@@ -78,7 +84,7 @@ const Profile = ({
 
   if (!firebase.profile.isLoaded) return null;
   return (
-    <Fragment>
+    <ProfileWrapper>
       <Formik
         initialValues={{
           firstName: firebase.profile.firstName,
@@ -138,19 +144,20 @@ const Profile = ({
               >
                 Edit
               </Button>
-              <MessageWrapper>
-                <Message error show={error}>
-                  {error}
-                </Message>
-              </MessageWrapper>
-              <MessageWrapper>
-                <Message success show={error === false}>
-                  Profile was updated!
-                </Message>
-              </MessageWrapper>
+            
               <DeleteWrapper onClick={() => setModalOpened(true)}>
                 Delete my account
               </DeleteWrapper>
+              <MessageWrapper>
+              <Message error show={error}>
+                {error}
+              </Message>
+            </MessageWrapper>
+            <MessageWrapper>
+              <Message success show={error === false}>
+                Profile was updated!
+              </Message>
+            </MessageWrapper>
             </StyledForm>
           </FormWrapper>
         )}
@@ -182,7 +189,7 @@ const Profile = ({
           </Message>
         </MessageWrapper>
       </Modal>
-    </Fragment>
+    </ProfileWrapper>
   );
 };
 

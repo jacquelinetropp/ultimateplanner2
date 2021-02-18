@@ -63,7 +63,7 @@ export const addTodo = (data, id) => async (
     return true;
   } catch (err) {
     dispatch({ type: actions.ADD_TODO_FAIL, payload: err.message });
-    console.log(err);
+ 
   }
 };
 
@@ -80,7 +80,7 @@ export const deleteTodo = (id) => async (
     firestore.collection('todos').doc(id).delete();
     dispatch({ type: actions.DELETE_TODO_SUCCESS });
   } catch (err) {
-    console.log(err);
+
     dispatch({ type: actions.DELETE_TODO_FAIL, payload: err.message });
   }
 };

@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
+
 import * as actions from "../../store/actions/index";
 
 import Modal from "../../components/UI/Modal/Modal";
 import Button from "../../components/UI/Forms/Button";
 import Heading from "../../components/UI/Headings/Headings";
 import Message from "../../components/UI/Messages/Message";
+import { withRouter } from "react-router-dom";
 
 const ButtonsWrapper = styled.div`
   display: flex;
@@ -36,6 +38,7 @@ const DeleteProject = ({
   deleteProject,
   loading,
   error,
+  history
 }) => {
   return (
     <Modal opened={show} close={close}>
@@ -51,7 +54,9 @@ const DeleteProject = ({
           contain
           color="red"
           onClick={() => {
+      
             deleteProject(project.id);
+            history.push("/");
           }}
           disabled={loading}
           loading={loading ? "Deleting..." : null}
@@ -80,4 +85,4 @@ const mapDispatchToProps = {
   deleteProject: actions.deleteProject,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeleteProject);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DeleteProject));

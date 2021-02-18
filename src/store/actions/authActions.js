@@ -31,10 +31,10 @@ export const signUp = (data) => async (
 export const signOut = () => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   try {
-    console.log("hello");
+
     await firebase.auth().signOut();
   } catch (err) {
-    console.log(err.message);
+
   }
 };
 
@@ -110,7 +110,7 @@ export const editProfile = (data) => async (
     }
     dispatch({ type: actions.PROFILE_SUCCESS });
   } catch (err) {
-    console.log(err);
+
     dispatch({ type: actions.PROFILE_FAIL, payload: err.message });
   }
 };

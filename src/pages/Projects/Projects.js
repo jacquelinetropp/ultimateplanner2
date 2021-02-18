@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   align-self: flex-start;
   height: 100%;
   min-height: calc(100vh - 6rem);
-  background-color: rgba(0,97,186,.6);
+  background-color: rgba(255,230,198, .4);
   z-index: 1;
 `;
 
@@ -26,21 +26,15 @@ const InnerWrapper = styled.div`
 `;
 
 const Content = styled.div`
-  /* display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: 60rem;
-  flex-direction: column;
-  margin-top: 2rem; */
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(250px, 1fr));
   grid-gap: 2rem;
 
   @media ${(props) => props.theme.mediaQueries.medium} {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2,  minmax(250px, 1fr));
   }
   @media ${(props) => props.theme.mediaQueries.small} {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(1,  minmax(250px, 1fr));
   }
 `;
 
@@ -59,12 +53,19 @@ const Projects = ({ getProjects, projects, loading, deleting }) => {
         <Loader isWhite />
       </Content>
     );
+  } else if (projects.length === 0) {
+    content = (
+      <Content>
+      <Heading size="h4" bold noProjects>
+        No Projects. Please Add a project.
+      </Heading> 
+    </Content> )
   }
   else {
     content = (
       <Content>
         {projects.map((project) => (
-          <SingleProject key={project.id} project={project} />
+          <SingleProject key={project.id} project={project} home/>
         ))}
       </Content>
     );
@@ -73,10 +74,10 @@ const Projects = ({ getProjects, projects, loading, deleting }) => {
   return (
     <Wrapper>
       <InnerWrapper>
-        <Heading nomargin size="h1" color="white">
+        <Heading nomargin size="h1">
           Your Projects
         </Heading>
-        <Heading size="h4" bold color="white">
+        <Heading size="h4" bold>
           All you have to do for now...
         </Heading>
         <Button color="main" contain onClick={() => setIsAdding(true)}>

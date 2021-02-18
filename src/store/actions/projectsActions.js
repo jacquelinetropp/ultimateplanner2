@@ -29,7 +29,7 @@ export const getProjects = () => async (
     });
   } catch (err) {
     dispatch({ type: actions.GET_PROJECT_FAIL, payload: err });
-    console.log(err);
+
   }
 };
 
@@ -50,7 +50,7 @@ export const getOneProject = (id) => async (
     dispatch({ type: actions.ONE_PROJECT_SUCCESS, payload: project });
   } catch (err) {
     dispatch({ type: actions.GET_PROJECT_FAIL, payload: err });
-    console.log(err);
+
   }
 };
 
@@ -70,21 +70,15 @@ export const addProject = (data) => async (
       userId: userId,
       createdAt: new Date().toISOString(),
     };
-    let project;
+
     await firestore
       .collection("projects")
       .add(newProject)
-      .then((docRef) => {
-        console.log("this is the doc ref ", docRef.id);
-        project = {
-          ...newProject,
-          id: docRef.id,
-        };
-      });
+ 
     dispatch({ type: actions.ADD_PROJECT_SUCCESS });
     return true;
   } catch (err) {
-    console.log(err);
+
     dispatch({ type: actions.ADD_PROJECT_FAIL, payload: err.message });
   }
 };
@@ -99,7 +93,7 @@ export const editProject = (id, data) => async (
   dispatch({ type: actions.ADD_PROJECT_START });
   try {
     const update = data.project;
-    console.log(update);
+
 
     await firestore.collection("projects").doc(id).update({
       name: update,
@@ -136,7 +130,7 @@ export const deleteProject = (id) => async (
 
     dispatch({ type: actions.DELETE_PROJECT_SUCCESS });
   } catch (err) {
-    console.log(err);
+
     dispatch({ type: actions.DELETE_PROJECT_FAIL, payload: err.message });
   }
 };
