@@ -32,7 +32,9 @@ const ProfileSchema = Yup.object().shape({
 });
 
 const ProfileWrapper = styled.div`
-  background-color: var(--color-tertiary);
+  background-color: rgba(255, 255,255, 0.8);
+  border-radius: 3rem;
+  margin: 3rem;
 `
 
 const MessageWrapper = styled.div`

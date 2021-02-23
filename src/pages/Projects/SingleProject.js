@@ -53,14 +53,14 @@ const deleteStyles = {
   cursor: "pointer",
 };
 
-const SingleProject = ({ project, active, getTodos, home }) => {
+const SingleProject = ({ project, getTodos, active }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
 
   return (
     <Wrapper active={active}>
-      <StyledLink active={active} to={`/${project.id}`} onClick={() => getTodos(project.id)}>{project.name}</StyledLink>
+      <StyledLink  to={`/${project.id}`} onClick={() => getTodos(project.id)}>{project.name}</StyledLink>
       <Controls>
         {" "}
         <i

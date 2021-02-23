@@ -89,7 +89,7 @@ const Projects = ({ getProjects, projects, loading, deleting }) => {
     </Wrapper>
   );
 };
-const mapStateToProps = ({ firebase, firestore, projects }) => ({
+const mapStateToProps = ({ firebase, projects }) => ({
   userId: firebase.auth.uid,
   projects: projects.projects,
   loading: projects.loading,
