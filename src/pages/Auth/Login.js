@@ -20,7 +20,7 @@ import Message from "../../components/UI/Messages/Message";
 
 const MessageWrapper = styled.div`
   position: absolute;
-  bottom: 0;
+  bottom: -15px;
 `;
 
 const Page = styled.div`

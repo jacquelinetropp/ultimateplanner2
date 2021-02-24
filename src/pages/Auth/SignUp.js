@@ -18,7 +18,7 @@ import Home from "../Home";
 
 const MessageWrapper = styled.div`
   position: absolute;
-  bottom: 0;
+  bottom: -15px;
 `;
 const Page = styled.div`
   position: relative;
