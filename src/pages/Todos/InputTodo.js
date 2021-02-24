@@ -59,7 +59,7 @@ const InputTodo = ({
           onSubmit={async (values, { setSubmitting, resetForm }) => {
             // send our todo
             const res = todo
-              ? await editTodo(todo.id, values)
+              ? (await editTodo(todo.id, values), close())
               : (await addTodo(values, id), close(), resetForm());
               // close();
               // resetForm();

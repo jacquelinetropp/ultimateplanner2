@@ -1,7 +1,6 @@
 import React, { Fragment, Suspense, lazy } from "react";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import ReactDom from "react-dom";
 
 import Layout from "./components/layouts/Layout";
 import Login from "./pages/Auth/Login";
@@ -9,12 +8,13 @@ import SignUp from "./pages/Auth/SignUp";
 import Logout from "./pages/Auth/Logout";
 import VerifyEmail from "./pages/Auth/VerifyEmail";
 import RecoverPassword from "./pages/Auth/RecoverPassword";
-import Profile from "./pages/Auth/Profile";
+// import Profile from "./pages/Auth/Profile";
 import TodosLayout from "./components/layouts/TodosLayout";
 import Loader from "./components/UI/Loader/Loader";
+// import Projects from './pages/Projects/Projects';
 
-
-const Projects = lazy(() => import('./pages/Projects/Projects'));
+const Profile = React.lazy(() => import ('./pages/Auth/Profile'));
+const Projects = React.lazy(() => import('./pages/Projects/Projects'));
 
 
 const App = ({ loggedIn, emailVerified }) => {
