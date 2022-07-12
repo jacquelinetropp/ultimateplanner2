@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, lazy } from "react";
+import React, { Fragment, Suspense } from "react";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 

@@ -78,7 +78,7 @@ const Projects = ({ getProjects, projects, loading, deleting }) => {
           Your Projects
         </Heading>
         <Heading size="h4" bold>
-          All you have to do for now...
+          Your projects...
         </Heading>
         <Button color="main" contain onClick={() => setIsAdding(true)}>
           Add Project

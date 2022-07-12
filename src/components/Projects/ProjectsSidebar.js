@@ -15,7 +15,7 @@ import Loader from "../UI/Loader/Loader";
 const Wrapper = styled.div`
  
   min-height: calc(100vh - 6rem);
-  background-color: ${(props) => props.mobile ? "none" : "rgba(0,97,186,.6);"};
+  background-color: ${(props) => props.mobile ? "none" : "rgba(23,122,252,.6);"};
 
   z-index: 1;
   display: flex;
@@ -74,9 +74,6 @@ const ProjectsSidebar = ({ getProjects, projects, loading, deleting, mobile }) =
       <InnerWrapper>
         <Heading nomargin size="h1" color="white">
           Your Projects
-        </Heading>
-        <Heading size="h4" bold color="white">
-          All you have to do for now...
         </Heading>
         <Button color="main" contain onClick={() => setIsAdding(true)}>
           Add Project

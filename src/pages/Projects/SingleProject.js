@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   position: relative;
   padding: 4rem 3rem;
 
-  background-color: ${(props) => (props.active ? "var(--color-second)" : "var(--color-mainLight) ")};
+  background-color: ${(props) => (props.active ? "var(--color-main)" : "var(--color-mainLight) ")};
   box-shadow: 0rem 0.5rem 3.5rem var(--shadow);
   margin-bottom: 3.5rem;
   border-radius: 0.5rem;
@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   z-index: 0;
 
   &:hover {
-    background-color: var(--color-second);
+    background-color: var(--color-main);
   }
 `;
 const Controls = styled.div`

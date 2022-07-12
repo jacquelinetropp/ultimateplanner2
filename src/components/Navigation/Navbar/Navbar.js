@@ -8,7 +8,7 @@ import NavItems from "../NavItems/NavItems";
 const FixedWrapper = styled.header`
   position: fixed;
   background-color: ${({ transparent }) =>
-    transparent ? "transparent" : "var(--color-main)"};
+    transparent ? "transparent" : "rgba(65, 71, 191, .3)"};
   padding: 0rem 2rem;
   top: 0;
   left: 0;

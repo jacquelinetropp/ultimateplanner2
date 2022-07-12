@@ -1,14 +1,14 @@
 const theme = {
   colors: {
-    main: "#2B0047",
+    main: "#4147BF",
     mainDark: "#000129",
-    mainLight: "#00328F",
-    second: "#630052",
-    secondLight: "rgba(237, 0, 126, .7)",
-    tertiary: "#FFE6C6",
+    mainLight: "#8985F2",
+    second: "#082B59",
+    secondLight: "#012340",
+    tertiary: "#E8F4F9",
     textColor: "#333",
     whiteColor: "#fff",
-    errorRed: "#ff3838",
+    errorRed: "#871E1E",
     shadow: "rgba(0,0,0,.2)",
   },
 

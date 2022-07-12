@@ -33,7 +33,7 @@ const Content = styled.div`
   margin-top: 2rem;
 `;
 
-const Todos = ({ id, getTodos, currentTodos, loading }) => {
+const Todos = ({ id, getTodos, currentTodos, loading, projectName }) => {
   useEffect(() => {
     getTodos(id);
   }, []);
@@ -69,10 +69,10 @@ const Todos = ({ id, getTodos, currentTodos, loading }) => {
     <Wrapper>
       <InnerWrapper>
         <Heading nomargin size="h1">
-          Your Tasks
+          {projectName}
         </Heading>
         <Heading size="h4" bold>
-          All you have to do for now...
+          Your Tasks
         </Heading>
         <Button color="main" contain onClick={() => setIsAdding(true)}>
           Add Task
@@ -83,8 +83,8 @@ const Todos = ({ id, getTodos, currentTodos, loading }) => {
     </Wrapper>
   );
 };
-const mapStateToProps = ({ todos }) => ({
-
+const mapStateToProps = ({ todos, projects }) => ({
+  projectName: projects.currentProject.name,
   currentTodos: todos.currentTodos,
   loading: todos.loading
 });
